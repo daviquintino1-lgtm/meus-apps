@@ -23,6 +23,10 @@ CHECKER = """<script id="auto-update">
   document.addEventListener("visibilitychange",function(){if(!document.hidden)check()});
   window.addEventListener("pageshow",check);
   check();
+  var s=document.createElement("p");
+  s.textContent="Atualizado em %s";
+  s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
+  document.body.appendChild(s);
 })();
 </script>"""
 
@@ -34,7 +38,8 @@ for index in sorted(ROOT.glob("*/index.html")):
     html = re.sub(r'<script id="auto-update">.*?</script>', "", html, flags=re.S)
     if 'http-equiv="Cache-Control"' not in html:
         html = html.replace("<head>", "<head>" + HEAD_META, 1)
-    html = html.replace("</body>", CHECKER % VERSION + "</body>", 1)
+    label = time.strftime("%d/%m às %H:%M", time.localtime())
+    html = html.replace("</body>", CHECKER % (VERSION, label) + "</body>", 1)
     index.write_text(html)
     (index.parent / "version.txt").write_text(VERSION + "\n")
     print(f"{index.parent.name}: versão {VERSION}")
