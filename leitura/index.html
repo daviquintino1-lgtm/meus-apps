@@ -586,23 +586,17 @@ async function round(intro){
     await play("t:find"); if(sid!==sess) return; await play("w:"+w);
     return;
   }
-  const d=wordData(w); const mode=L.idx%2===0?"listen":"read";
-  $("replay").textContent="🔊 Sounds"; $("pickHint").textContent="Which picture is it?";
+  const d=wordData(w);
+  $("replay").textContent="🔊 Hear it"; $("pickHint").textContent="Which picture is it?";
   $("word").innerHTML=d.g.map((g,k)=>`<button class="tile${g.length>1?" multi":""}" data-k="${k}" aria-label="sound ${g}">${g}</button>`).join("");
   document.querySelectorAll("#word .tile").forEach(t=>t.onclick=async()=>{hush();t.classList.add("lit");await play("ph:"+d.p[+t.dataset.k]);t.classList.remove("lit");if(d.g[+t.dataset.k]==="ing")play("t:ing");});
   const others=shuffle(levelData(L.lv).words.filter(x=>x[0]!==w)).slice(0,2);
   $("choices").innerHTML=shuffle([L.queue[L.idx],...others]).map(o=>`<button class="choice" data-w="${o[0]}" aria-label="picture choice">${o[1]}</button>`).join("");
   document.querySelectorAll(".choice").forEach(c=>c.onclick=()=>pick(c,w));
   if(L.lv===BASE&&L.idx===0){await play("t:week");if(sid!==sess)return;}
-  if(mode==="listen"){
-    bubble("Listen to the sounds… then push them together!");
-    await play("t:listen"); if(sid!==sess) return;
-    await playSounds(w,sid,true); if(sid!==sess) return;
-    await play("t:blend");
-  }else{
-    bubble("Your turn! Read it. Tap a letter to hear its sound.");
-    await play("t:read");
-  }
+  /* no automatic letter sounds: the child taps each letter to hear it, "Hear it" says the whole word */
+  bubble("Tap a letter to hear its sound. Which picture is it?");
+  await play(L.idx===0?"t:read":"t:pick");
 }
 async function pick(btn,w){
   if(L.busy||btn.classList.contains("wrong")) return;
@@ -610,20 +604,17 @@ async function pick(btn,w){
   if(btn.dataset.w===w){
     L.busy=true; btn.classList.add("right"); SFX.ding(); L.firstTry=L.tries===0;
     bubble(w+"! "+(L.firstTry?"First try! ⭐⭐":"You got it! ⭐"));
-    if(L.kind==="phonics"){await playSounds(w,sid);if(sid!==sess)return;}
-    else{await play("w:"+w);if(sid!==sess)return;}
+    await play("w:"+w); if(sid!==sess) return;
     await play("t:"+pickOne(PRAISE)); if(sid!==sess) return;
     openSayIt(w,L.kind==="sight"?"👀":btn.textContent);
   }else{
     L.tries++; btn.classList.add("wrong"); SFX.bonk();
-    bubble("Oops! Listen again…");
-    await play("t:wrong"); if(sid!==sess) return;
-    if(L.kind==="sight"){await play("w:"+w);return;}
-    await playSounds(w,sid); if(sid!==sess) return;
-    if(L.tries>=2){$("stretchBtn").hidden=false;await play("t:slowly");if(sid!==sess)return;await play("ws:"+w);}
+    bubble("Almost! Listen, and try again.");
+    await play("t:almost"); if(sid!==sess) return;
+    await play("w:"+w);
   }
 }
-$("replay").onclick=()=>{hush();const w=L.queue[L.idx][0];if(L.kind==="sight")play("w:"+w);else playSounds(w,sess);};
+$("replay").onclick=()=>{hush();play("w:"+L.queue[L.idx][0]);};
 $("stretchBtn").onclick=()=>{hush();play("ws:"+L.queue[L.idx][0]);};
 
 /* say-it with the microphone */
