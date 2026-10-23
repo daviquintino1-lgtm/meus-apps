@@ -57,12 +57,13 @@ def fade(a, fi=.008, fo=.04):
     a = a.copy(); i, o = int(fi*SR), int(fo*SR); a[:i] *= np.linspace(0, 1, i); a[-o:] *= np.linspace(1, 0, o); return a
 
 rep = json.load(open("conferencia.json")); log = {}
-for w, r in rep.items():
-    key = hashlib.md5((w + ".").encode()).hexdigest()[:12]
+def clean(w, text, want):
+    key = hashlib.md5(text.encode()).hexdigest()[:12]
     f, orig = f"{CACHE}/{key}.npy", f"{CACHE}/orig_{key}.npy"
+    if not os.path.exists(f): print("missing", w, text); return
     if not os.path.exists(orig): shutil.copy(f, orig)
-    x = np.load(orig); T = tokens(x); target = simple(r["want"])
-    if not T: continue
+    x = np.load(orig); T = tokens(x); target = simple(want)
+    if not T: return
     # 1) drop a recognized sound at either edge only if the word matches strictly better without it
     i, j = 0, len(T) - 1
     sc = lambda a, b: dist2("".join(simple(t[0]) for t in T[a:b+1]), target)
@@ -91,5 +92,20 @@ for w, r in rep.items():
     log[w] = {"heard": " ".join(t[0] for t in T), "kept": " ".join(t[0] for t in T[i:j+1]),
               "cut_before_ms": round(cut_before*1000), "cut_after_ms": round(cut_after*1000)}
     flag = "  <-- cut" if cut_before > .15 or cut_after > .2 else ""
-    print(f"{w:10s} [{log[w]['heard']}] kept [{log[w]['kept']}] -{log[w]['cut_before_ms']}ms / -{log[w]['cut_after_ms']}ms{flag}", flush=True)
+    print(f"{w:10s} [{log[w]['heard'][:60]}] kept [{log[w]['kept'][:60]}] -{log[w]['cut_before_ms']}ms / -{log[w]['cut_after_ms']}ms{flag}", flush=True)
+
+for w, r in rep.items(): clean(w, w + ".", r["want"])
+
+# tutor phrases (t:) and story sentences (s:) get the same treatment
+import ast, espeakng_loader
+from phonemizer.backend.espeak.wrapper import EspeakWrapper
+EspeakWrapper.set_library(espeakng_loader.get_library_path()); EspeakWrapper.set_data_path(espeakng_loader.get_data_path())
+from phonemizer import phonemize
+src = open("build_audio.py").read()
+grab = lambda name, end: ast.literal_eval(src[src.index(name + " = ") + len(name) + 3: src.index(end, src.index(name + " = ")) + 1])
+PH = grab("PHRASES", "}\n"); ST = grab("STORY", "]\n")
+items = [("t:" + k, v) for k, v in PH.items()] + [(f"s:{i}", s) for i, s in enumerate(ST)]
+texts = [v if v.rstrip()[-1:] in ".!?:\"" else v + "." for _, v in items]
+wants = phonemize([re.sub(r"[^A-Za-z' ]", " ", v) for _, v in items], language="en-us", backend="espeak", strip=True)
+for (name, _), text, want in zip(items, texts, wants): clean(name, text, want)
 json.dump(log, open("limpeza.json", "w"), ensure_ascii=False, indent=1)
