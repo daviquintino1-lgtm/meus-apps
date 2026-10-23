@@ -123,7 +123,7 @@ deal();
 </script>
 <script id="auto-update">
 (function(){
-  var V="20261023125809";
+  var V="20261023130552";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -134,7 +134,7 @@ deal();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 23/10 às 12:58";
+  s.textContent="Atualizado em 23/10 às 13:05";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();
