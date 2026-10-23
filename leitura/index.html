@@ -317,18 +317,27 @@ function getBuf(k){
   return BUF[k];
 }
 function preload(){if(!window.AUDIO)return;Object.keys(AUDIO).forEach((k,i)=>setTimeout(()=>getBuf(k),i*15));}
-let sess=0,cur=null,curRes=null;
-async function play(key,talk=true){
-  const my=sess; const b=await getBuf(key);
-  if(!b||my!==sess) return;
+/* Voice plays through one media element: on iPhone/iPad media audio still plays in silent mode, Web Audio does not. */
+const voiceEl=new Audio(); voiceEl.preload="auto"; voiceEl.setAttribute("playsinline","");
+let sess=0,curRes=null;
+function play(key,talk=true){
+  const d=window.AUDIO&&AUDIO[key]; if(!d) return Promise.resolve();
   return new Promise(res=>{
-    const s=AC.createBufferSource(); s.buffer=b; s.connect(voiceGain);
-    cur=s; curRes=res; if(talk) talking(true);
-    s.onended=()=>{if(cur===s){cur=null;curRes=null;}talking(false);res();};
-    s.start();
+    let done=false;
+    const fin=()=>{if(done)return;done=true;voiceEl.onended=voiceEl.onerror=null;if(curRes===fin)curRes=null;talking(false);res();};
+    curRes=fin; voiceEl.onended=fin; voiceEl.onerror=fin;
+    voiceEl.src="data:audio/mpeg;base64,"+d;
+    if(talk) talking(true);
+    const p=voiceEl.play(); if(p&&p.catch) p.catch(fin);
+    setTimeout(fin,9000);
   });
 }
-function hush(){sess++;if(cur){try{cur.onended=null;cur.stop();}catch(e){}cur=null;}talking(false);if(curRes){const r=curRes;curRes=null;r();}}
+function hush(){sess++;try{voiceEl.pause();}catch(e){}talking(false);if(curRes){const r=curRes;curRes=null;r();}}
+function wakeAudio(){
+  try{if(navigator.audioSession)navigator.audioSession.type="playback";}catch(e){}
+  if(AC&&AC.state!=="running"){try{AC.resume();}catch(e){}}
+}
+document.addEventListener("pointerdown",wakeAudio,true);
 function tone(f,d,type="sine",v=.3,when=0,slide=0){
   if(!AC) return; const t=AC.currentTime+when;
   const o=AC.createOscillator(),g=AC.createGain(); o.type=type; o.frequency.setValueAtTime(f,t);
@@ -761,17 +770,17 @@ function confetti(){
 
 /* ---------- start ---------- */
 buildSoundGrid();
-$("startBtn").onclick=async()=>{
-  initAudio(); try{await AC.resume();}catch(e){}
-  $("startOv").hidden=true; renderHome(); preload();
-  setTimeout(()=>play("t:hello"),250);
+$("startBtn").onclick=()=>{
+  wakeAudio(); initAudio(); wakeAudio();
+  $("startOv").hidden=true; renderHome();
+  play("t:hello");            /* must start inside the tap so iOS unlocks sound */
 };
 updateBar();
 </script>
 
 <script id="auto-update">
 (function(){
-  var V="20261022210046";
+  var V="20261022210946";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -782,7 +791,7 @@ updateBar();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 22/10 às 21:00";
+  s.textContent="Atualizado em 22/10 às 21:09";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();
