@@ -15,9 +15,7 @@ from sons_chatterbox import SR, FR, norm, fade, frames
 
 LEAD = 0.14   # seconds of silence before every clip
 TAIL = 0.08
-GAP = 0.13    # short breath between sounds, like a teacher tapping each letter
-CONT = {"s","ʃ","f","θ","m","n","l","v","z"}   # sounds a teacher holds ("fff", "mmm")
-CONT_LEN = 0.42
+GAP = 0.4     # pause between sounds, same as in the teacher's video
 
 G2P = {"a":"æ","e":"ɛ","i":"ɪ","o":"ɑ","u":"ʌ","b":"b","c":"k","d":"d","f":"f","g":"ɡ","h":"h","j":"ʤ","k":"k",
        "l":"l","m":"m","n":"n","p":"p","r":"ɹ","s":"s","t":"t","v":"v","w":"w","y":"j","z":"z",
@@ -141,24 +139,21 @@ def main():
     for w in allw:
         g = SPLIT.get(w) or list(w)
         p = [G2P[x] for x in g]
-        # teacher model in ONE clip: sounds (short gaps) -> slow blend -> the word
-        word = norm(tts(w), 0.8); slow = norm(slowdown(word), 0.8)
+        # teacher model in ONE clip: the real teacher's sounds, exactly as recorded -> the word.
+        # No made-up slow blend (it sounded strange); tb == tw so the app goes straight to the word.
+        word = norm(tts(w), 0.8)
         parts, times, t = [], [], LEAD
         for i, ph in enumerate(p):
             seg = P[ph]
-            if ph in CONT: seg = seg[:int(CONT_LEN*SR)]   # hold, but not forever
-            seg = fade(seg, 0.005, 0.03)
             times.append(round(t, 3)); parts.append(seg); t += len(seg)/SR
             if i < len(p)-1:
                 parts.append(np.zeros(int(GAP*SR), np.float32)); t += GAP
-        parts.append(np.zeros(int(.35*SR), np.float32)); t += .35
-        tb = round(t, 3); parts.append(slow); t += len(slow)/SR
-        parts.append(np.zeros(int(.25*SR), np.float32)); t += .25
-        tw = round(t, 3); parts.append(word)
+        parts.append(np.zeros(int(.6*SR), np.float32)); t += .6
+        tb = tw = round(t, 3); parts.append(word)
         out["so:"+w] = mp3(np.concatenate(parts), 0.8)
-        words[w] = {"g": g, "p": p, "t": times, "tb": tb, "tw": tw, "db": round(len(slow)/SR, 3)}
+        words[w] = {"g": g, "p": p, "t": times, "tb": tb, "tw": tw, "db": 0.01}
         out["w:"+w] = mp3(word)
-        out["ws:"+w] = mp3(slow)
+        out["ws:"+w] = mp3(word)
     for w in SIGHT + VOCAB:
         if "w:"+w not in out: out["w:"+w] = mp3(tts(w, 0.9))
     # every word of the story, for tap-to-hear

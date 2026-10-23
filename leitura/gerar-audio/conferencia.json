@@ -1,0 +1,500 @@
+{
+ "cat": {
+  "want": "kæt",
+  "heard": "k æ t",
+  "dist": 0,
+  "retried": 0
+ },
+ "hat": {
+  "want": "hæt",
+  "heard": "h a t",
+  "dist": 0,
+  "retried": 0
+ },
+ "bat": {
+  "want": "bæt",
+  "heard": "b a t",
+  "dist": 0,
+  "retried": 2
+ },
+ "map": {
+  "want": "mæp",
+  "heard": "m æ p",
+  "dist": 0,
+  "retried": 1
+ },
+ "van": {
+  "want": "væn",
+  "heard": "v eɪ n",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "rat": {
+  "want": "ɹæt",
+  "heard": "ɹ æ t",
+  "dist": 0,
+  "retried": 0
+ },
+ "cap": {
+  "want": "kæp",
+  "heard": "k a p",
+  "dist": 0,
+  "retried": 1
+ },
+ "pan": {
+  "want": "pæn",
+  "heard": "p æ n",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "pig": {
+  "want": "pɪɡ",
+  "heard": "p ɛ ɡ",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "pin": {
+  "want": "pɪn",
+  "heard": "p ɪ n",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "lip": {
+  "want": "lɪp",
+  "heard": "l ɪ p",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "kid": {
+  "want": "kɪd",
+  "heard": "k eː d",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "dog": {
+  "want": "dɑːɡ",
+  "heard": "d ɑː ɡ eː",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "hot": {
+  "want": "hɑːt",
+  "heard": "h ɑː t",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "log": {
+  "want": "lɔɡ",
+  "heard": "l ɑː ɡ",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "fox": {
+  "want": "fɑːks",
+  "heard": "f ɑː k s",
+  "dist": 0.0,
+  "source": "natural:fox?"
+ },
+ "bed": {
+  "want": "bɛd",
+  "heard": "b ɛ d",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "hen": {
+  "want": "hɛn",
+  "heard": "h ɛ n",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "web": {
+  "want": "wɛb",
+  "heard": "w ɛ b",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "ten": {
+  "want": "tɛn",
+  "heard": "t ɛ n",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "bus": {
+  "want": "bʌs",
+  "heard": "b a s",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "sun": {
+  "want": "sʌn",
+  "heard": "ə s a n",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "cup": {
+  "want": "kʌp",
+  "heard": "k aː b i",
+  "dist": 2.0,
+  "source": "kokoro1.0"
+ },
+ "bug": {
+  "want": "bʌɡ",
+  "heard": "b a ɡ",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "fish": {
+  "want": "fɪʃ",
+  "heard": "f ɪ ʃ",
+  "dist": 0.0,
+  "source": "natural:fish!"
+ },
+ "ship": {
+  "want": "ʃɪp",
+  "heard": "ɑː ʃ ɪ p",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "shell": {
+  "want": "ʃɛl",
+  "heard": "ʃ ɛ l",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "chick": {
+  "want": "tʃɪk",
+  "heard": "tʃ ɛ k",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "duck": {
+  "want": "dʌk",
+  "heard": "d ɑː k",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "sock": {
+  "want": "sɑːk",
+  "heard": "ə s a k",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "bath": {
+  "want": "bæθ",
+  "heard": "b aː θ",
+  "dist": 0.0,
+  "source": "natural:Bath."
+ },
+ "lock": {
+  "want": "lɑːk",
+  "heard": "ə l ɑː k",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "stop": {
+  "want": "stɑːp",
+  "heard": "s t ɑː p",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "crab": {
+  "want": "kɹæb",
+  "heard": "k ɹ æ b",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "drum": {
+  "want": "dɹʌm",
+  "heard": "d ɹ ʌ m",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "flag": {
+  "want": "flæɡ",
+  "heard": "f l æ ɡ",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "sled": {
+  "want": "slɛd",
+  "heard": "s l ɛ d",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "frog": {
+  "want": "fɹɑːɡ",
+  "heard": "f ɹ ɑː ɡ",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "tent": {
+  "want": "tɛnt",
+  "heard": "t ɛ n t",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "gift": {
+  "want": "ɡɪft",
+  "heard": "ɡ ɪ f t",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "shop": {
+  "want": "ʃɑːp",
+  "heard": "ə ʃ ɑː p",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "trash": {
+  "want": "tɹæʃ",
+  "heard": "t ɹ a ʃ",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "fishing": {
+  "want": "fɪʃɪŋ",
+  "heard": "f ɪ ʃ ɪ ŋ",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "splash": {
+  "want": "splæʃ",
+  "heard": "uː s p l æ ʃ",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "wishing": {
+  "want": "wɪʃɪŋ",
+  "heard": "w ɪ ʃ ɪ ŋ",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "rushing": {
+  "want": "ɹʌʃɪŋ",
+  "heard": "ɹ ʌ ʃ ɪ ŋ",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "thin": {
+  "want": "θɪn",
+  "heard": "θ ɪ n",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "with": {
+  "want": "wɪð",
+  "heard": "w ɪ ð",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "math": {
+  "want": "mæθ",
+  "heard": "m a s",
+  "dist": 1.0,
+  "source": "natural:math?"
+ },
+ "all": {
+  "want": "ɔːl",
+  "heard": "a l",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "goes": {
+  "want": "ɡoʊz",
+  "heard": "ɡ aʊ z",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "her": {
+  "want": "hɜː",
+  "heard": "x ə5",
+  "dist": 1.5,
+  "source": "natural"
+ },
+ "make": {
+  "want": "meɪk",
+  "heard": "m eɪ k",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "too": {
+  "want": "tuː",
+  "heard": "t iː",
+  "dist": 0.5,
+  "source": "kokoro1.0"
+ },
+ "she": {
+  "want": "ʃiː",
+  "heard": "s. i5",
+  "dist": 1.0,
+  "source": "natural"
+ },
+ "the": {
+  "want": "ðə",
+  "heard": "ð a",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "this": {
+  "want": "ðɪs",
+  "heard": "ð ɪ s",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "then": {
+  "want": "ðɛn",
+  "heard": "ð ɛ n",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "says": {
+  "want": "sɛz",
+  "heard": "s ɛ z",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "is": {
+  "want": "ɪz",
+  "heard": "eː z",
+  "dist": 0.5,
+  "source": "kokoro1.0"
+ },
+ "for": {
+  "want": "fɔːɹ",
+  "heard": "f ɔːɹ",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "to": {
+  "want": "tuː",
+  "heard": "th y5",
+  "dist": 1.0,
+  "source": "natural:to?"
+ },
+ "said": {
+  "want": "sɛd",
+  "heard": "s ɛ d",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "eat": {
+  "want": "iːt",
+  "heard": "iː t",
+  "dist": 0.5,
+  "source": "kokoro1.0"
+ },
+ "dig": {
+  "want": "dɪɡ",
+  "heard": "d eː ɡ",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "sleep": {
+  "want": "sliːp",
+  "heard": "s l iː p",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "burrow": {
+  "want": "bɜːɹoʊ",
+  "heard": "b ɜː ɹ oʊ",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "beth": {
+  "want": "bɛθ",
+  "heard": "b aː θ",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "seth": {
+  "want": "sɛθ",
+  "heard": "uː s ɛ θ",
+  "dist": 0.5,
+  "source": "natural:seth?"
+ },
+ "a": {
+  "want": "eɪ",
+  "heard": "aɪ",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "big": {
+  "want": "bɪɡ",
+  "heard": "b ɛ ɡ",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "thrashing": {
+  "want": "θɹæʃɪŋ",
+  "heard": "θ ɹ æ ʃ ɪ ŋ",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "and": {
+  "want": "ænd",
+  "heard": "æ n d",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "splashing": {
+  "want": "splæʃɪŋ",
+  "heard": "s p l æ ʃ ɪ ŋ",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "help": {
+  "want": "hɛlp",
+  "heard": "h ɛ l p",
+  "dist": 0.0,
+  "source": "natural:help?"
+ },
+ "sees": {
+  "want": "siːz",
+  "heard": "a s iː z",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "grins": {
+  "want": "ɡɹɪnz",
+  "heard": "ɐ ɡ ɹ ɪ n z",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "best": {
+  "want": "bɛst",
+  "heard": "b ɛ s t",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "thing": {
+  "want": "θɪŋ",
+  "heard": "θ ɪ ŋ",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "slips": {
+  "want": "slɪps",
+  "heard": "s l ɪ p s",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "back": {
+  "want": "bæk",
+  "heard": "b a k",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "in": {
+  "want": "ɪn",
+  "heard": "ʔ ɪ n",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "it": {
+  "want": "ɪt",
+  "heard": "ɪ t",
+  "dist": 0.5,
+  "source": "natural"
+ }
+}
