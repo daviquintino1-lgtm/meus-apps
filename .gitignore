@@ -1,4 +1,6 @@
 __pycache__/
 leitura/gerar-audio/snd2/
 leitura/gerar-audio/amostra_sons.*
-leitura/gerar-audio/sons.npz
+
+cache/
+leitura/gerar-audio/audio.js

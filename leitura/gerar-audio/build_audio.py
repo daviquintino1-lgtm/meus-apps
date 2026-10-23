@@ -1,13 +1,17 @@
-"""Builds audio.js for Read with Miss Lua (Kokoro af_heart voice).
+"""Builds audio.js for Read with Miss Lua (Chatterbox voice, Heart timbre).
 
+Speech comes from Chatterbox (sons_chatterbox.say, cloned from ref_heart.wav).
+Letter sounds come from sons.npz (made by sons_chatterbox.py + sons_fix.py).
+Slow words (ws:) are the normal word time-stretched with rubberband (keeps pitch and formants).
 Every clip gets a short silent lead-in so iPad Safari does not swallow the start.
 Each word also gets one 'sound-out' clip (all its sounds in a row) with the
 start time of each sound, so the app plays one file instead of many tiny ones.
+Generated speech is cached in cache/ so an interrupted run picks up where it stopped.
 """
-import json, base64, io, subprocess
+import json, base64, io, os, sys, hashlib, subprocess
 import numpy as np, soundfile as sf
-import phon
-from phon import K, SR, norm, main_run, fade
+import sons_chatterbox as V
+from sons_chatterbox import SR, FR, norm, fade, frames
 
 LEAD = 0.14   # seconds of silence before every clip
 TAIL = 0.08
@@ -84,12 +88,37 @@ PHRASES = {
 def pad(a, lead=LEAD, tail=TAIL):
     return np.concatenate([np.zeros(int(lead*SR), np.float32), a.astype(np.float32), np.zeros(int(tail*SR), np.float32)])
 
-def tts(text, speed=0.95):
-    a, sr = K.create(text, voice=phon.VOICE, speed=speed, lang="en-us")
-    a = np.asarray(a, np.float32); fs = phon.frames(a); m = max(f[0] for f in fs)
+CACHE = "cache"; os.makedirs(CACHE, exist_ok=True)
+
+def cut(a):
+    """drop the engine's silence/breath around the speech"""
+    fs = frames(a); m = max(f[0] for f in fs)
     s = next(i for i, f in enumerate(fs) if f[0] > m*0.15)
     e = max(i for i, f in enumerate(fs) if f[0] > m*0.02) + 1
-    return fade(a[max(0, s*phon.FR-int(.04*SR)):e*phon.FR+int(.06*SR)], 0.01, 0.05)
+    return fade(a[max(0, s*FR-int(.04*SR)):e*FR+int(.06*SR)], 0.01, 0.05)
+
+def tts(text, speed=None):
+    """speech in the Heart voice. `speed` is kept for old call sites; Chatterbox talks at its natural pace."""
+    t = text if text.rstrip()[-1:] in ".!?:\"" else text + "."
+    f = f"{CACHE}/{hashlib.md5(t.encode()).hexdigest()[:12]}.npy"
+    if os.path.exists(f): return np.load(f)
+    limit = 1.5 + 0.5*len(t.split())          # longer than this = the engine rambled
+    best = None
+    for seed in range(5):
+        a = cut(V.say(t, seed, 0.6)); d = len(a)/SR
+        print(f"  {d:4.1f}s seed{seed} {t[:50]}", file=sys.stderr, flush=True)
+        if best is None or abs(d - limit*0.5) < abs(len(best)/SR - limit*0.5): best = a
+        if 0.25 < d <= limit: best = a; break
+    np.save(f, best)
+    return best
+
+def slowdown(a, tempo=0.72):
+    """teacher-slow word: rubberband time-stretch, same pitch and voice"""
+    buf = io.BytesIO(); sf.write(buf, a, SR, format="WAV")
+    p = subprocess.run(["ffmpeg","-loglevel","error","-f","wav","-i","pipe:0",
+                        "-af",f"rubberband=tempo={tempo}:pitchq=quality:formant=preserved:transients=smooth",
+                        "-ac","1","-ar",str(SR),"-f","f32le","pipe:1"], input=buf.getvalue(), capture_output=True, check=True)
+    return fade(np.frombuffer(p.stdout, np.float32).copy(), 0.01, 0.05)
 
 def mp3(a, peak=0.85):
     buf = io.BytesIO(); sf.write(buf, pad(norm(a, peak)), SR, format="WAV")
@@ -97,15 +126,10 @@ def mp3(a, peak=0.85):
                        input=buf.getvalue(), capture_output=True, check=True)
     return base64.b64encode(p.stdout).decode()
 
-def ing_sound():
-    a = phon.synth("ˈɪŋ", 0.8); s, e = main_run(a, 0.08)
-    return fade(a[s:e+int(.04*SR)], 0.01, 0.08)
-
 def main():
     out = {}
-    P = phon.build()
+    P = {k: np.asarray(v, np.float32) for k, v in np.load("sons.npz").items()}   # approved letter sounds
     P["ks"] = np.concatenate([P["k"], np.zeros(int(.02*SR), np.float32), P["s"][:int(.3*SR)]])
-    P["ɪŋ"] = ing_sound()
     P = {k: norm(v, 0.8) for k, v in P.items()}
     for ph, a in P.items():
         out["ph:"+ph] = mp3(a, 0.8)
@@ -118,7 +142,7 @@ def main():
         g = SPLIT.get(w) or list(w)
         p = [G2P[x] for x in g]
         # teacher model in ONE clip: sounds (short gaps) -> slow blend -> the word
-        word = norm(tts(w, 0.9), 0.8); slow = norm(tts(w, 0.72), 0.8)
+        word = norm(tts(w), 0.8); slow = norm(slowdown(word), 0.8)
         parts, times, t = [], [], LEAD
         for i, ph in enumerate(p):
             seg = P[ph]

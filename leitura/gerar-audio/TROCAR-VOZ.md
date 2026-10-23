@@ -1,5 +1,7 @@
 # Trocar a voz da Miss Lua por uma voz natural
 
+> **Feito em 23/10/2026:** voz trocada para Chatterbox com o timbre Heart (escolha do pai), sons das letras regravados na mesma voz. Veja LEIA-ME.md.
+
 Pedido do pai: a voz atual (Kokoro `af_heart`) soa robótica. Ele quer uma voz natural, estilo ElevenLabs, falando como uma professora americana de 1º ano (warm, clear, encouraging). `huggingface.co` foi liberado nas Capacidades da conta em 22/10/2026, então uma sessão nova consegue baixar os modelos.
 
 ## O que fazer

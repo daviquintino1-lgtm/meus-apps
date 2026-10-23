@@ -9,7 +9,7 @@ import os, sys, subprocess, numpy as np, soundfile as sf, torch
 from chatterbox.tts import ChatterboxTTS
 
 SR = 24000; FR = 240
-REF = os.environ.get("REF", "/home/claude/vozes/ref_af_heart.wav")
+REF = os.environ.get("REF", os.path.join(os.path.dirname(os.path.abspath(__file__)), "ref_heart.wav"))
 OUT = "snd2"; os.makedirs(OUT, exist_ok=True)
 torch.set_num_threads(2)
 M = ChatterboxTTS.from_pretrained(device="cpu")
