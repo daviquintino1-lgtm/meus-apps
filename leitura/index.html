@@ -655,7 +655,7 @@ $("micBtn").onclick=async()=>{
     $("heard").className="heard bad"; $("heard").textContent=said?`I heard: “${said}”`:"I didn't hear you. 🙉";
     if(sayTries>=3){await play("t:practice");if(sid!==sess)return;await play("w:"+sayWordNow);if(sid!==sess)return;finishWord(0);return;}
     await play("t:almost"); if(sid!==sess) return;
-    await play((L&&L.kind==="phonics"?"so:":"w:")+sayWordNow);
+    await play("w:"+sayWordNow);   /* only the whole word, never letter by letter */
   }
 };
 $("hearWord").onclick=()=>{hush();play("w:"+sayWordNow);};
@@ -1090,7 +1090,7 @@ updateBar();
 
 <script id="auto-update">
 (function(){
-  var V="20261023123023";
+  var V="20261023125809";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -1101,7 +1101,7 @@ updateBar();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 23/10 às 12:30";
+  s.textContent="Atualizado em 23/10 às 12:58";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();

@@ -7,6 +7,7 @@ srv=http.server.ThreadingHTTPServer(("127.0.0.1",8766),functools.partial(Q,direc
 with sync_playwright() as p:
     b=p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required"]); pg=b.new_page(); errs=[]
     pg.on("pageerror",lambda e:errs.append(str(e)))
+    pg.add_init_script("class FR{start(){setTimeout(()=>{this.onresult&&this.onresult({results:[[{transcript:'banana',confidence:.9}]],resultIndex:0});this.onend&&this.onend();},300)}stop(){}abort(){}};window.SpeechRecognition=FR;window.webkitSpeechRecognition=FR;")
     pg.goto("http://127.0.0.1:8766/index.html"); pg.wait_for_timeout(1200)
     pg.evaluate("window.LOG=[];const _p=play;window.play=function(k,...r){LOG.push(k);return _p(k,...r)}")
     pg.click("#startBtn"); pg.wait_for_timeout(1500)
@@ -16,5 +17,7 @@ with sync_playwright() as p:
     pg.evaluate("LOG.length=0"); pg.click("#replay"); pg.wait_for_timeout(1500); print("Hear it:",pg.evaluate("LOG.slice()"))
     pg.evaluate("LOG.length=0"); pg.click(f".choice:not([data-w='{w}']) >> nth=0"); pg.wait_for_timeout(5000); print("figura errada:",pg.evaluate("LOG.slice()"))
     pg.evaluate("LOG.length=0"); pg.click(f".choice[data-w='{w}']"); pg.wait_for_timeout(7000); print("figura certa:",pg.evaluate("LOG.slice()"),"| vez dele aberta:",pg.evaluate("!$('sayItOv').hidden"))
+    pg.evaluate("LOG.length=0"); pg.click("#micBtn"); pg.wait_for_timeout(6000); print("microfone ouviu errado:",pg.evaluate("LOG.slice()"))
+    pg.evaluate("LOG.length=0"); pg.click("#hearWord"); pg.wait_for_timeout(1500); print("Hear it again:",pg.evaluate("LOG.slice()"))
     print("erros:",errs or "nenhum"); b.close()
 srv.shutdown()
