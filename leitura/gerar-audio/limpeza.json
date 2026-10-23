@@ -1,0 +1,500 @@
+{
+ "cat": {
+  "heard": "k æ t",
+  "kept": "k æ t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 3
+ },
+ "hat": {
+  "heard": "h a t",
+  "kept": "h a t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 8
+ },
+ "bat": {
+  "heard": "b a t",
+  "kept": "b a t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 3
+ },
+ "map": {
+  "heard": "m æ p",
+  "kept": "m æ p",
+  "cut_before_ms": 0,
+  "cut_after_ms": 6
+ },
+ "van": {
+  "heard": "v eɪ n",
+  "kept": "v eɪ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "rat": {
+  "heard": "ɹ æ t",
+  "kept": "ɹ æ t",
+  "cut_before_ms": 10,
+  "cut_after_ms": 20
+ },
+ "cap": {
+  "heard": "k a p",
+  "kept": "k a p",
+  "cut_before_ms": 123,
+  "cut_after_ms": 2
+ },
+ "pan": {
+  "heard": "p æ n",
+  "kept": "p æ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "pig": {
+  "heard": "p ɛ ɡ",
+  "kept": "p ɛ ɡ",
+  "cut_before_ms": 84,
+  "cut_after_ms": 0
+ },
+ "pin": {
+  "heard": "p ɪ n",
+  "kept": "p ɪ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "lip": {
+  "heard": "l ɪ p",
+  "kept": "l ɪ p",
+  "cut_before_ms": 0,
+  "cut_after_ms": 27
+ },
+ "kid": {
+  "heard": "k eː d",
+  "kept": "k eː d",
+  "cut_before_ms": 2,
+  "cut_after_ms": 20
+ },
+ "dog": {
+  "heard": "d ɑː ɡ eː",
+  "kept": "d ɑː ɡ",
+  "cut_before_ms": 10,
+  "cut_after_ms": 20
+ },
+ "hot": {
+  "heard": "h ɑː t",
+  "kept": "h ɑː t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "log": {
+  "heard": "l ɑː ɡ",
+  "kept": "l ɑː ɡ",
+  "cut_before_ms": 3,
+  "cut_after_ms": 0
+ },
+ "fox": {
+  "heard": "f ɑː k s",
+  "kept": "f ɑː k s",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "bed": {
+  "heard": "b ɛ d",
+  "kept": "b ɛ d",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "hen": {
+  "heard": "h ɛ n",
+  "kept": "h ɛ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "web": {
+  "heard": "w ɛ b",
+  "kept": "w ɛ b",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "ten": {
+  "heard": "t ɛ n",
+  "kept": "t ɛ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "bus": {
+  "heard": "b a s",
+  "kept": "b a s",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "sun": {
+  "heard": "ə s a n",
+  "kept": "s a n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "cup": {
+  "heard": "k aː b i",
+  "kept": "k aː b",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "bug": {
+  "heard": "b a ɡ",
+  "kept": "b a ɡ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 26
+ },
+ "fish": {
+  "heard": "f ɪ ʃ",
+  "kept": "f ɪ ʃ",
+  "cut_before_ms": 106,
+  "cut_after_ms": 7
+ },
+ "ship": {
+  "heard": "ɑː ʃ ɪ p",
+  "kept": "ʃ ɪ p",
+  "cut_before_ms": 440,
+  "cut_after_ms": 0
+ },
+ "shell": {
+  "heard": "ʃ ɛ l",
+  "kept": "ʃ ɛ l",
+  "cut_before_ms": 590,
+  "cut_after_ms": 0
+ },
+ "chick": {
+  "heard": "tʃ ɛ k",
+  "kept": "tʃ ɛ k",
+  "cut_before_ms": 0,
+  "cut_after_ms": 3
+ },
+ "duck": {
+  "heard": "d ɑː k",
+  "kept": "d ɑː k",
+  "cut_before_ms": 10,
+  "cut_after_ms": 6
+ },
+ "sock": {
+  "heard": "ə s a k",
+  "kept": "s a k",
+  "cut_before_ms": 10,
+  "cut_after_ms": 23
+ },
+ "bath": {
+  "heard": "b aː θ",
+  "kept": "b aː θ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "lock": {
+  "heard": "ə l ɑː k",
+  "kept": "l ɑː k",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "stop": {
+  "heard": "s t ɑː p",
+  "kept": "s t ɑː p",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "crab": {
+  "heard": "k ɹ æ b",
+  "kept": "k ɹ æ b",
+  "cut_before_ms": 0,
+  "cut_after_ms": 6
+ },
+ "drum": {
+  "heard": "d ɹ ʌ m",
+  "kept": "d ɹ ʌ m",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "flag": {
+  "heard": "f l æ ɡ",
+  "kept": "f l æ ɡ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "sled": {
+  "heard": "s l ɛ d",
+  "kept": "s l ɛ d",
+  "cut_before_ms": 10,
+  "cut_after_ms": 3
+ },
+ "frog": {
+  "heard": "f ɹ ɑː ɡ",
+  "kept": "f ɹ ɑː ɡ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 6
+ },
+ "tent": {
+  "heard": "t ɛ n t",
+  "kept": "t ɛ n t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "gift": {
+  "heard": "ɡ ɪ f t",
+  "kept": "ɡ ɪ f t",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "shop": {
+  "heard": "ə ʃ ɑː p",
+  "kept": "ʃ ɑː p",
+  "cut_before_ms": 10,
+  "cut_after_ms": 3
+ },
+ "trash": {
+  "heard": "t ɹ a ʃ",
+  "kept": "t ɹ a ʃ",
+  "cut_before_ms": 4,
+  "cut_after_ms": 8
+ },
+ "fishing": {
+  "heard": "f ɪ ʃ ɪ ŋ",
+  "kept": "f ɪ ʃ ɪ ŋ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "splash": {
+  "heard": "uː s p l æ ʃ",
+  "kept": "s p l æ ʃ",
+  "cut_before_ms": 410,
+  "cut_after_ms": 2
+ },
+ "wishing": {
+  "heard": "w ɪ ʃ ɪ ŋ",
+  "kept": "w ɪ ʃ ɪ ŋ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "rushing": {
+  "heard": "ɹ ʌ ʃ ɪ ŋ",
+  "kept": "ɹ ʌ ʃ ɪ ŋ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "thin": {
+  "heard": "θ ɪ n",
+  "kept": "θ ɪ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "with": {
+  "heard": "w ɪ ð",
+  "kept": "w ɪ ð",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "math": {
+  "heard": "m aː s",
+  "kept": "m aː s",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "all": {
+  "heard": "a l",
+  "kept": "a l",
+  "cut_before_ms": 0,
+  "cut_after_ms": 50
+ },
+ "goes": {
+  "heard": "ɡ aʊ z",
+  "kept": "ɡ aʊ z",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "her": {
+  "heard": "x ə5",
+  "kept": "x ə5",
+  "cut_before_ms": 0,
+  "cut_after_ms": 10
+ },
+ "make": {
+  "heard": "m eɪ k",
+  "kept": "m eɪ k",
+  "cut_before_ms": 10,
+  "cut_after_ms": 30
+ },
+ "too": {
+  "heard": "t iː",
+  "kept": "t iː",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "she": {
+  "heard": "s. i5",
+  "kept": "s. i5",
+  "cut_before_ms": 0,
+  "cut_after_ms": 290
+ },
+ "the": {
+  "heard": "ð a",
+  "kept": "ð a",
+  "cut_before_ms": 10,
+  "cut_after_ms": 30
+ },
+ "this": {
+  "heard": "ð ɪ s",
+  "kept": "ð ɪ s",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "then": {
+  "heard": "ð ɛ n",
+  "kept": "ð ɛ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "says": {
+  "heard": "s ɛ z",
+  "kept": "s ɛ z",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "is": {
+  "heard": "eː z",
+  "kept": "eː z",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "for": {
+  "heard": "f ɔːɹ",
+  "kept": "f ɔːɹ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 30
+ },
+ "to": {
+  "heard": "th y5",
+  "kept": "th",
+  "cut_before_ms": 0,
+  "cut_after_ms": 10
+ },
+ "said": {
+  "heard": "s ɛ d",
+  "kept": "s ɛ d",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "eat": {
+  "heard": "iː t",
+  "kept": "iː t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "dig": {
+  "heard": "d eː ɡ",
+  "kept": "d eː ɡ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 30
+ },
+ "sleep": {
+  "heard": "s l iː p",
+  "kept": "s l iː p",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "burrow": {
+  "heard": "b ɜː ɹ oʊ",
+  "kept": "b ɜː ɹ oʊ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "beth": {
+  "heard": "b aː θ",
+  "kept": "b aː θ",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "seth": {
+  "heard": "uː s ɛ θ",
+  "kept": "s ɛ θ",
+  "cut_before_ms": 470,
+  "cut_after_ms": 100
+ },
+ "a": {
+  "heard": "aɪ",
+  "kept": "aɪ",
+  "cut_before_ms": 10,
+  "cut_after_ms": 30
+ },
+ "big": {
+  "heard": "b ɛ ɡ",
+  "kept": "b ɛ ɡ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 30
+ },
+ "thrashing": {
+  "heard": "θ ɹ æ ʃ ɪ ŋ",
+  "kept": "θ ɹ æ ʃ ɪ ŋ",
+  "cut_before_ms": 384,
+  "cut_after_ms": 0
+ },
+ "and": {
+  "heard": "æ n d",
+  "kept": "æ n d",
+  "cut_before_ms": 10,
+  "cut_after_ms": 7
+ },
+ "splashing": {
+  "heard": "s p l æ ʃ ɪ ŋ",
+  "kept": "s p l æ ʃ ɪ ŋ",
+  "cut_before_ms": 580,
+  "cut_after_ms": 0
+ },
+ "help": {
+  "heard": "h ɛ l p",
+  "kept": "h ɛ l p",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "sees": {
+  "heard": "a s iː z",
+  "kept": "s iː z",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "grins": {
+  "heard": "ɐ ɡ ɹ ɪ n z",
+  "kept": "ɡ ɹ ɪ n z",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "best": {
+  "heard": "b ɛ s t",
+  "kept": "b ɛ s t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "thing": {
+  "heard": "θ ɪ ŋ",
+  "kept": "θ ɪ ŋ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "slips": {
+  "heard": "s l ɪ p s",
+  "kept": "s l ɪ p s",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "back": {
+  "heard": "b a k",
+  "kept": "b a k",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "in": {
+  "heard": "ʔ ɪ n",
+  "kept": "ʔ ɪ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "it": {
+  "heard": "ɪ t",
+  "kept": "ɪ t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 30
+ }
+}
