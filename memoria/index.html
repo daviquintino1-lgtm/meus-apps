@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><head><link rel="apple-touch-icon" href="icon.png"><link rel="icon" type="image/png" href="icon.png"><meta name="apple-mobile-web-app-title" content="Memória"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><style>*,*::before,*::after{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}</style></head><body><title>Memória da Família</title>
+<!doctype html><html lang="pt-BR"><head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><link rel="apple-touch-icon" href="icon.png"><link rel="icon" type="image/png" href="icon.png"><meta name="apple-mobile-web-app-title" content="Memória"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><style>*,*::before,*::after{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}</style></head><body><title>Memória da Família</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700&display=swap">
 <style>
@@ -121,4 +121,17 @@ function finish(){
 el('again').onclick=deal;el('again2').onclick=deal;
 deal();
 </script>
-</body></html>
+<script id="auto-update">
+(function(){
+  var V="20261022204643";
+  function check(){
+    fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
+      t=(t||"").trim();
+      if(t&&t!==V){location.replace(location.pathname+"?v="+t)}
+    }).catch(function(){});
+  }
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)check()});
+  window.addEventListener("pageshow",check);
+  check();
+})();
+</script></body></html>
