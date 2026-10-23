@@ -475,11 +475,11 @@ function listen(ms,onWords){
     if(!SRec||micBlocked){res({error:"unsupported",texts:[]});return;}
     try{voiceEl.pause();}catch(e){}
     const r=new SRec(); rec=r; r.lang="en-US"; r.interimResults=true; r.maxAlternatives=5; r.continuous=!!onWords;
-    let texts=[],done=false;
+    let texts=[],done=false; const seen=new Set();   /* keep every guess the iPad made while he talked */
     const fin=err=>{if(done)return;done=true;try{r.stop();}catch(e){}if(rec===r)rec=null;res({error:err,texts});};
     r.onresult=e=>{
-      texts=[];
-      for(let i=0;i<e.results.length;i++){const R=e.results[i];for(let j=0;j<R.length;j++)texts.push(R[j].transcript);}
+      for(let i=0;i<e.results.length;i++){const R=e.results[i];for(let j=0;j<R.length;j++)seen.add(R[j].transcript);}
+      texts=[...seen];
       if(onWords&&onWords(texts)) fin();
       else if(!onWords&&e.results[e.results.length-1].isFinal) fin();
     };
@@ -489,9 +489,22 @@ function listen(ms,onWords){
     setTimeout(()=>fin(),ms);
   });
 }
+/* Children's speech: the iPad recognizer is made for adults, so accept the word the way a teacher
+   would: same homophones as before, plus typical kid swaps (th→f/d, r/l→w, sh/ch→s, dropped last
+   sound) and one sound off (two for long words) as long as the first sound is right. */
+function kidForm(w){return w.replace(/ck/g,"k").replace(/th/g,"f").replace(/sh/g,"s").replace(/ch/g,"c").replace(/[rl]/g,"w").replace(/(.)\1+/g,"$1");}
+function editDist(a,b){const d=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const t=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t;}}return d[b.length];}
+function kidMatch(target,w){
+  if(!w) return false;
+  if(target===w||(HOMO[target]||[]).includes(w)) return true;
+  if(target.length<3) return false;
+  const a=kidForm(target),b=kidForm(w);
+  if(a===b) return true;
+  const firstOk=a[0]===b[0]||(target.startsWith("th")&&"fdv".includes(w[0]));
+  return firstOk&&editDist(a,b)<=(target.length>=6?2:1);
+}
 function heardWord(target,texts){
-  const ok=[target,...(HOMO[target]||[])];
-  for(const t of texts){if(norm(t).some(w=>ok.includes(w)))return true;}
+  for(const t of texts){if(norm(t).some(w=>kidMatch(target,w)))return true;}
   return false;
 }
 
@@ -725,7 +738,7 @@ $("stRead").onclick=async()=>{
     const mark=texts=>{
       const heard=[];texts.forEach(t=>heard.push(...norm(t)));
       let all=true;
-      spans.forEach((s,k)=>{const ok=[targets[k],...(HOMO[targets[k]]||[])].some(x=>heard.includes(x));if(ok)s.classList.add("ok");else all=false;});
+      spans.forEach((s,k)=>{const ok=heard.some(h=>kidMatch(targets[k],h));if(ok)s.classList.add("ok");else all=false;});
       return all;
     };
     const r=await listen(3500+targets.length*900,mark);
@@ -1095,7 +1108,7 @@ updateBar();
 
 <script id="auto-update">
 (function(){
-  var V="20261023130552";
+  var V="20261023195106";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -1106,7 +1119,7 @@ updateBar();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 23/10 às 13:05";
+  s.textContent="Atualizado em 23/10 às 19:51";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();
