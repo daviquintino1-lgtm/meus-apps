@@ -11,7 +11,9 @@ from phon import K, SR, norm, main_run, fade
 
 LEAD = 0.14   # seconds of silence before every clip
 TAIL = 0.08
-GAP = 0.30    # silence between sounds in a sound-out clip
+GAP = 0.13    # short breath between sounds, like a teacher tapping each letter
+CONT = {"s","ʃ","f","θ","m","n","l","v","z"}   # sounds a teacher holds ("fff", "mmm")
+CONT_LEN = 0.42
 
 G2P = {"a":"æ","e":"ɛ","i":"ɪ","o":"ɑ","u":"ʌ","b":"b","c":"k","d":"d","f":"f","g":"ɡ","h":"h","j":"ʤ","k":"k",
        "l":"l","m":"m","n":"n","p":"p","r":"ɹ","s":"s","t":"t","v":"v","w":"w","y":"j","z":"z",
@@ -48,10 +50,10 @@ STORY = [
 
 PHRASES = {
  "hello": "Hi! I'm Miss Lua. Let's read some words, win stars, and play games!",
- "listen": "Listen to the sounds.",
- "blend": "Now push the sounds together. What word is it?",
- "read": "Your turn! Read this word. Tap a letter if you need help.",
- "wrong": "Oops, not that one. Let's listen again.",
+ "listen": "My turn. Watch the letters, and listen.",
+ "blend": "Your turn! Which picture is it?",
+ "read": "Your turn to read! Sound it out. You can tap a letter for help.",
+ "wrong": "Hmm, not that one. Let's sound it out together.",
  "slowly": "Let's say it slowly.",
  "say": "Now you say it!",
  "p1": "Great job!", "p2": "You did it!", "p3": "Super reader!", "p4": "Awesome!", "p5": "Wow, well done!", "p6": "Yes! You're a star!",
@@ -115,16 +117,24 @@ def main():
     for w in allw:
         g = SPLIT.get(w) or list(w)
         p = [G2P[x] for x in g]
-        # one sound-out clip with the start time of each sound (lead included)
+        # teacher model in ONE clip: sounds (short gaps) -> slow blend -> the word
+        word = norm(tts(w, 0.9), 0.8); slow = norm(tts(w, 0.72), 0.8)
         parts, times, t = [], [], LEAD
         for i, ph in enumerate(p):
-            times.append(round(t, 3)); parts.append(P[ph]); t += len(P[ph])/SR
+            seg = P[ph]
+            if ph in CONT: seg = seg[:int(CONT_LEN*SR)]   # hold, but not forever
+            seg = fade(seg, 0.005, 0.03)
+            times.append(round(t, 3)); parts.append(seg); t += len(seg)/SR
             if i < len(p)-1:
                 parts.append(np.zeros(int(GAP*SR), np.float32)); t += GAP
+        parts.append(np.zeros(int(.35*SR), np.float32)); t += .35
+        tb = round(t, 3); parts.append(slow); t += len(slow)/SR
+        parts.append(np.zeros(int(.25*SR), np.float32)); t += .25
+        tw = round(t, 3); parts.append(word)
         out["so:"+w] = mp3(np.concatenate(parts), 0.8)
-        words[w] = {"g": g, "p": p, "t": times}
-        out["w:"+w] = mp3(tts(w, 0.9))
-        out["ws:"+w] = mp3(tts(w, 0.72))
+        words[w] = {"g": g, "p": p, "t": times, "tb": tb, "tw": tw, "db": round(len(slow)/SR, 3)}
+        out["w:"+w] = mp3(word)
+        out["ws:"+w] = mp3(slow)
     for w in SIGHT + VOCAB:
         if "w:"+w not in out: out["w:"+w] = mp3(tts(w, 0.9))
     # every word of the story, for tap-to-hear
@@ -136,7 +146,7 @@ def main():
     for i, s in enumerate(STORY):
         out[f"s:{i}"] = mp3(tts(s, 0.88))
     for k, t in PHRASES.items():
-        out["t:"+k] = mp3(tts(t, 1.0))
+        out["t:"+k] = mp3(tts(t, 0.95))
     js = "window.AUDIO=" + json.dumps(out) + ";window.PHON=" + json.dumps(words, ensure_ascii=False) + ";"
     open("audio.js","w").write(js)
     print("clips", len(out), "size KB", len(js)//1024)

@@ -394,17 +394,21 @@ function initAudio(){
 /* Voice plays through one media element: on iPhone/iPad media audio still plays in silent mode, Web Audio does not. */
 const voiceEl=new Audio(); voiceEl.preload="auto"; voiceEl.setAttribute("playsinline","");
 let sess=0,curRes=null;
+function clipSecs(d){return d.length*0.75*8/64000;}   /* 64 kbps mp3 */
 function play(key,talk=true,onStart){
   const d=window.AUDIO&&AUDIO[key]; if(!d) return Promise.resolve();
+  try{if(navigator.audioSession)navigator.audioSession.type="playback";}catch(e){}
   return new Promise(res=>{
     let done=false,started=false;
-    const fin=()=>{if(done)return;done=true;voiceEl.onended=voiceEl.onerror=voiceEl.onplaying=null;if(curRes===fin)curRes=null;talking(false);res();};
+    const start=()=>{if(started)return;started=true;onStart&&onStart();};
+    const fin=()=>{if(done)return;done=true;voiceEl.onended=voiceEl.onerror=voiceEl.onplaying=null;if(curRes===fin)curRes=null;talking(false);start();res();};
     curRes=fin; voiceEl.onended=fin; voiceEl.onerror=fin;
-    voiceEl.onplaying=()=>{if(started)return;started=true;onStart&&onStart();};
+    voiceEl.onplaying=start;
     voiceEl.src="data:audio/mpeg;base64,"+d;
     if(talk) talking(true);
     const p=voiceEl.play(); if(p&&p.catch) p.catch(fin);
-    setTimeout(fin,15000);
+    setTimeout(start,400);                         /* some iPads never fire "playing" */
+    setTimeout(fin,clipSecs(d)*1000+1500);         /* never wait longer than the clip itself */
   });
 }
 function hush(){sess++;try{voiceEl.pause();}catch(e){}talking(false);if(curRes){const r=curRes;curRes=null;r();}stopListening();}
@@ -540,12 +544,32 @@ function startLevel(i){hush();L={kind:"phonics",lv:i,queue:shuffle(levelData(i).
 function startSight(){hush();L={kind:"sight",lv:"sight",queue:shuffle(SIGHTW).slice(0,8).map(w=>[w,"👀"]),idx:0,since:0,busy:false,tries:0};show("lesson");round(true);}
 function bubble(t){$("say").textContent=t;}
 function wordData(w){return (window.PHON&&PHON[w])||{g:w.split(""),p:w.split("").map(c=>G2P[c])};}
-async function playSounds(w,sid){
+async function playSounds(w,sid,soundsOnly){
   const d=wordData(w),tiles=[...document.querySelectorAll("#word .tile")];
+  if(soundsOnly&&d.tb!=null){
+    /* question: only the separate sounds, the child does the blending */
+    const lit=k=>{if(sid!==sess)return;tiles.forEach(t=>t.classList.remove("lit"));if(tiles[k])tiles[k].classList.add("lit");};
+    let timers=[];
+    await play("so:"+w,true,()=>{
+      timers=d.t.map((t,k)=>setTimeout(()=>lit(k),Math.max(0,t*1000-60)));
+      timers.push(setTimeout(()=>{if(sid!==sess)return;try{voiceEl.pause();}catch(e){}if(curRes)curRes();},d.tb*1000-200));
+    });
+    timers.forEach(clearTimeout); tiles.forEach(t=>t.classList.remove("lit")); return;
+  }
   const lit=k=>{if(sid!==sess)return;tiles.forEach(t=>t.classList.remove("lit"));if(tiles[k])tiles[k].classList.add("lit");};
+  /* teacher model: tap each letter, then sweep under the word while blending slowly, then the whole word */
+  const all=on=>tiles.forEach(t=>t.classList.toggle("lit",on));
   let timers=[];
-  await play("so:"+w,true,()=>{timers=(d.t||[]).map((t,k)=>setTimeout(()=>lit(k),Math.max(0,t*1000-60)));});
-  timers.forEach(clearTimeout); tiles.forEach(t=>t.classList.remove("lit"));
+  await play("so:"+w,true,()=>{
+    timers=(d.t||[]).map((t,k)=>setTimeout(()=>lit(k),Math.max(0,t*1000-60)));
+    if(d.tb!=null){
+      const step=(d.db||.8)*1000/Math.max(1,tiles.length);
+      timers.push(setTimeout(()=>all(false),d.tb*1000-150));
+      tiles.forEach((_,k)=>timers.push(setTimeout(()=>{if(sid===sess)tiles[k].classList.add("lit");},d.tb*1000+k*step)));
+      timers.push(setTimeout(()=>{if(sid===sess)all(true);},d.tw*1000));
+    }
+  });
+  timers.forEach(clearTimeout); await wait(250); tiles.forEach(t=>t.classList.remove("lit"));
 }
 async function round(intro){
   hush(); const sid=sess; L.busy=false; L.tries=0;
@@ -573,7 +597,7 @@ async function round(intro){
   if(mode==="listen"){
     bubble("Listen to the sounds… then push them together!");
     await play("t:listen"); if(sid!==sess) return;
-    await playSounds(w,sid); if(sid!==sess) return;
+    await playSounds(w,sid,true); if(sid!==sess) return;
     await play("t:blend");
   }else{
     bubble("Your turn! Read it. Tap a letter to hear its sound.");
@@ -586,8 +610,8 @@ async function pick(btn,w){
   if(btn.dataset.w===w){
     L.busy=true; btn.classList.add("right"); SFX.ding(); L.firstTry=L.tries===0;
     bubble(w+"! "+(L.firstTry?"First try! ⭐⭐":"You got it! ⭐"));
-    await play("w:"+w); if(sid!==sess) return;
-    if(L.kind==="phonics"){await wait(150);await playSounds(w,sid);if(sid!==sess)return;await play("w:"+w);if(sid!==sess)return;}
+    if(L.kind==="phonics"){await playSounds(w,sid);if(sid!==sess)return;}
+    else{await play("w:"+w);if(sid!==sess)return;}
     await play("t:"+pickOne(PRAISE)); if(sid!==sess) return;
     openSayIt(w,L.kind==="sight"?"👀":btn.textContent);
   }else{
@@ -603,7 +627,7 @@ $("replay").onclick=()=>{hush();const w=L.queue[L.idx][0];if(L.kind==="sight")pl
 $("stretchBtn").onclick=()=>{hush();play("ws:"+L.queue[L.idx][0]);};
 
 /* say-it with the microphone */
-let sayTries=0,sayWordNow="";
+let sayTries=0,sayWordNow="",silentTries=0;
 function openSayIt(w,pic){
   sayTries=0; sayWordNow=w;
   $("sayPic").textContent=pic; $("sayWord").textContent=w; $("sayTitle").textContent="Say it out loud!";
@@ -624,6 +648,13 @@ $("micBtn").onclick=async()=>{
     $("heard").textContent="Microfone bloqueado. Confirme você:"; $("micBtn").hidden=true; $("saidIt").hidden=false; $("parentOk").hidden=true; return;
   }
   const said=(r.texts[0]||"").trim();
+  if(!said&&!r.texts.length){
+    silentTries=(silentTries||0)+1;
+    if(silentTries>=2){ /* the iPad is not passing the mic through: let the parent confirm */
+      $("heard").className="heard bad"; $("heard").textContent="O microfone não captou. Confirme você:";
+      $("micBtn").hidden=true; $("saidIt").hidden=false; $("parentOk").hidden=true; return;
+    }
+  }
   if(heardWord(sayWordNow,r.texts)){
     $("heard").className="heard good"; $("heard").textContent="I heard: "+sayWordNow+" ✅";
     SFX.ding(); confetti(); await play("t:perfect"); if(sid!==sess) return;
@@ -633,8 +664,7 @@ $("micBtn").onclick=async()=>{
     $("heard").className="heard bad"; $("heard").textContent=said?`I heard: “${said}”`:"I didn't hear you. 🙉";
     if(sayTries>=3){await play("t:practice");if(sid!==sess)return;await play("w:"+sayWordNow);if(sid!==sess)return;finishWord(0);return;}
     await play("t:almost"); if(sid!==sess) return;
-    if(L&&L.kind==="phonics"){await play("so:"+sayWordNow);if(sid!==sess)return;}
-    await play("w:"+sayWordNow);
+    await play((L&&L.kind==="phonics"?"so:":"w:")+sayWordNow);
   }
 };
 $("hearWord").onclick=()=>{hush();play("w:"+sayWordNow);};
@@ -1069,7 +1099,7 @@ updateBar();
 
 <script id="auto-update">
 (function(){
-  var V="20261022213338";
+  var V="20261022214605";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -1080,7 +1110,7 @@ updateBar();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 22/10 às 21:33";
+  s.textContent="Atualizado em 22/10 às 21:46";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();
