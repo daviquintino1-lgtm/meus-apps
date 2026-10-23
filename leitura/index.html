@@ -8,6 +8,7 @@
   --sky:#BFE6FF; --sky2:#EAF7FF; --grass:#7BC96F; --grass2:#5BAE52;
   --ink:#1F3150; --muted:#53668A; --card:#FFFFFF; --line:#C9D6EA;
   --sun:#FFC83D; --coral:#FF6B5B; --leaf:#2E8B57; --berry:#7A5CFF; --night:#141B3D;
+  --okbg:#D7F5CF; --missbg:#FFE1C2; --errbg:#FFD0D0;
   --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
   --read:"Andika","Comic Sans MS",system-ui,sans-serif;
   color-scheme:light;
@@ -39,6 +40,17 @@ button:focus-visible{outline:4px solid var(--berry);outline-offset:3px}
 .bubble small{display:block;color:var(--muted);font-size:.85rem;margin-top:4px}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,7vw,2.6rem);line-height:1;margin:0;text-wrap:balance}
 h2{font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0}
+
+/* this week at school */
+.week{background:linear-gradient(135deg,#FFF3C4,#FFE08A);border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 5px 0 #E0B94A}
+.week .eyebrow{font-family:var(--display);font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00}
+.week h2{font-size:1.45rem;line-height:1.1}
+.weekbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.weekbtn{background:var(--card);border-radius:18px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--display);font-weight:800;font-size:1rem;line-height:1.1;text-align:center;box-shadow:0 4px 0 rgba(138,90,0,.25)}
+.weekbtn .e{font-size:1.9rem}
+.weekbtn small{font-weight:600;color:var(--muted);font-size:.78rem}
+.weekbtn:active{transform:translateY(3px)}
+
 .bigrow{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .bigbtn{border-radius:24px;padding:14px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;color:#fff;font-family:var(--display);font-weight:800;font-size:1.35rem;line-height:1.1;text-align:left;position:relative;overflow:hidden;min-height:96px}
 .bigbtn .e{font-size:2.2rem;line-height:1}
@@ -66,25 +78,49 @@ details.parents li{margin-bottom:6px}
 .sndgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;margin-top:8px}
 .sndgrid button{background:var(--sky2);border-radius:12px;padding:6px 4px;font-family:var(--read);font-weight:700;font-size:1.3rem;line-height:1.1;box-shadow:0 2px 0 var(--line)}
 .sndgrid button small{display:block;font-weight:400;font-size:.75rem;color:var(--muted)}
+
+/* lesson */
 .progress{display:flex;gap:6px}
 .progress i{flex:1;height:10px;border-radius:5px;background:rgba(31,49,80,.15)}
 .progress i.on{background:var(--sun)}
-.word{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:4px 0}
-.tile{min-width:74px;height:100px;padding:0 12px 14px;background:var(--card);border-radius:20px;font-family:var(--read);font-weight:700;font-size:3.5rem;line-height:1;display:grid;place-items:center;box-shadow:0 6px 0 #9DB4D6;position:relative;transition:transform .15s,background .15s}
+.word{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.tile{min-width:66px;height:96px;padding:0 10px 14px;background:var(--card);border-radius:20px;font-family:var(--read);font-weight:700;font-size:3.3rem;line-height:1;display:grid;place-items:center;box-shadow:0 6px 0 #9DB4D6;position:relative;transition:transform .15s,background .15s}
 .tile::after{content:"";position:absolute;bottom:12px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--berry);opacity:.55}
 .tile.multi::after{width:36px;margin-left:-18px;border-radius:6px;height:7px}
 .tile.lit{background:var(--sun);transform:translateY(-8px) scale(1.05)}
 .tools{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .tool{background:var(--berry);color:#fff;border-radius:16px;padding:10px 16px;font-family:var(--display);font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 0 #4B36B8}
 .tool.alt{background:#53668A;box-shadow:0 4px 0 #34445F}
+.tool.warm{background:var(--coral);box-shadow:0 4px 0 #C9463A}
+.tool.on{background:var(--leaf);box-shadow:0 4px 0 #1C6640}
 .hint{text-align:center;font-family:var(--display);font-weight:600;color:var(--ink);margin:0}
 .choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .choice{background:var(--card);border-radius:24px;aspect-ratio:1;max-width:100%;font-size:clamp(3rem,14vw,5rem);display:grid;place-items:center;box-shadow:0 6px 0 rgba(31,49,80,.2);transition:transform .15s}
+.choice.wordc{aspect-ratio:auto;min-height:110px;font-family:var(--read);font-weight:700;font-size:clamp(1.8rem,8vw,2.8rem)}
 .choice:active{transform:translateY(4px)}
-.choice.right{background:#D7F5CF;box-shadow:0 6px 0 var(--leaf);animation:pop .4s}
+.choice.right{background:var(--okbg);box-shadow:0 6px 0 var(--leaf);animation:pop .4s}
 .choice.wrong{opacity:.3;animation:shake .4s}
 @keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 @keyframes pop{50%{transform:scale(1.12)}}
+
+/* story */
+.storybox{background:var(--card);border-radius:24px;padding:16px 18px;box-shadow:0 5px 0 rgba(31,49,80,.15);display:flex;flex-direction:column;gap:6px}
+.storybox h2{font-size:1.6rem;display:flex;align-items:center;gap:8px}
+.sent{margin:0;font-size:clamp(1.35rem,5.4vw,1.75rem);line-height:1.55;padding:2px 8px;border-radius:12px;transition:background .2s}
+.sent.cur{background:#FFF3C4}
+.sw{border-radius:8px;padding:0 2px;cursor:pointer;transition:background .2s}
+.sw.ok{background:var(--okbg)}
+.sw.miss{background:var(--missbg)}
+.sw.err{background:var(--errbg);text-decoration:line-through;text-decoration-color:var(--coral)}
+.sw.tap{background:var(--sun)}
+.flu{background:var(--card);border-radius:20px;padding:12px 16px;font-family:system-ui,sans-serif;display:flex;flex-direction:column;gap:8px}
+.flu .clock{font-family:var(--display);font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums}
+.flu table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.95rem}
+.flu th,.flu td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+.flu .goal{color:var(--muted);font-size:.9rem}
+.tablewrap{overflow-x:auto}
+
+/* overlays */
 .overlay{position:fixed;inset:0;background:rgba(20,27,61,.6);display:grid;place-items:center;z-index:20;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .card{background:var(--card);border-radius:28px;padding:22px 20px;width:100%;max-width:440px;box-sizing:border-box;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;animation:popin .3s ease-out}
 @keyframes popin{from{transform:scale(.85);opacity:.5}to{transform:scale(1);opacity:1}}
@@ -95,11 +131,18 @@ details.parents li{margin-bottom:6px}
 .go{background:var(--coral);color:#fff;border-radius:20px;padding:14px 26px;font-family:var(--display);font-weight:800;font-size:1.4rem;box-shadow:0 5px 0 #C9463A;display:flex;gap:10px;align-items:center}
 .go.green{background:var(--leaf);box-shadow:0 5px 0 #1C6640}
 .go:active{transform:translateY(3px)}
-.mic{width:70px;height:70px;border-radius:50%;background:#FFE9A8;display:grid;place-items:center;font-size:2.2rem;animation:pulse 1.2s infinite}
-@keyframes pulse{50%{transform:scale(1.1)}}
+.mic{width:96px;height:96px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center;font-size:2.8rem;box-shadow:0 6px 0 #C9463A}
+.mic.listening{background:var(--leaf);box-shadow:0 0 0 0 rgba(46,139,87,.5);animation:ring 1s infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(46,139,87,.55)}100%{box-shadow:0 0 0 26px rgba(46,139,87,0)}}
+.heard{min-height:1.6em;font-family:var(--display);font-weight:800;font-size:1.3rem}
+.heard.good{color:var(--leaf)}
+.heard.bad{color:#C9463A}
+.linkbtn{background:none;color:var(--muted);font-family:system-ui,sans-serif;font-size:.9rem;text-decoration:underline;padding:4px}
 .start{background:radial-gradient(circle at 50% 35%,#FFF6D6,var(--sky) 60%)}
 .start .card{box-shadow:0 10px 0 rgba(31,49,80,.15)}
 .start h1{font-size:2.4rem}
+
+/* arcade */
 .gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .gcard{border-radius:24px;padding:12px;color:#fff;text-align:left;display:flex;flex-direction:column;gap:2px;min-height:150px;position:relative;overflow:hidden;font-family:var(--display);font-weight:800;box-shadow:0 5px 0 rgba(0,0,0,.25)}
 .gcard .e{font-size:3.2rem;line-height:1.1;filter:drop-shadow(0 4px 2px rgba(0,0,0,.25))}
@@ -131,7 +174,7 @@ details.parents li{margin-bottom:6px}
 .floater{position:fixed;z-index:31;pointer-events:none;font-family:var(--display);font-weight:800;font-size:1.8rem;color:var(--ink);animation:floatup 1s ease-out forwards}
 @keyframes floatup{to{transform:translateY(-70px);opacity:0}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media (max-width:420px){.tile{min-width:58px;height:84px;font-size:2.8rem;padding:0 8px 12px}.tutor{width:72px;flex-basis:72px}.tutor.big{width:104px;flex-basis:104px}.bubble{font-size:1.05rem}.bigbtn{font-size:1.15rem}}
+@media (max-width:420px){.tile{min-width:52px;height:82px;font-size:2.6rem;padding:0 7px 12px}.tutor{width:72px;flex-basis:72px}.tutor.big{width:104px;flex-basis:104px}.bubble{font-size:1.05rem}.bigbtn{font-size:1.15rem}.weekbtn{font-size:.9rem}}
 </style>
 
 <div class="app">
@@ -148,21 +191,30 @@ details.parents li{margin-bottom:6px}
       <div class="tutor big" data-tutor></div>
       <div class="bubble">Hi! I'm <b>Miss Lua</b>. Let's read words, win stars and play games!<small>Leia palavras, ganhe estrelas e bilhetes de jogo.</small></div>
     </div>
+    <div class="week">
+      <span class="eyebrow">This week at school · Oct 19–23</span>
+      <h2>SH · TH · -ING</h2>
+      <div class="weekbtns">
+        <button class="weekbtn" id="wkPhonics"><span class="e">🔤</span>Sound it out<small>ship · fishing</small></button>
+        <button class="weekbtn" id="wkSight"><span class="e">👀</span>Know by heart<small>all · goes · her</small></button>
+        <button class="weekbtn" id="wkStory"><span class="e">🎣</span>Story<small>“Fishing”</small></button>
+      </div>
+    </div>
     <div class="bigrow">
       <button class="bigbtn games" id="toArcade"><span class="e">🎮</span>Games<small id="arcadeSub">3 words = 1 ticket</small><span class="badge" id="ticketBadge" hidden></span></button>
       <button class="bigbtn shop" id="toShop"><span class="e">🛍️</span>Shop<small>Spend your stars</small></button>
     </div>
-    <h1>Pick a level</h1>
+    <h1>All levels</h1>
     <div class="levels" id="levels"></div>
     <div class="panel"><h2>My stickers</h2><div class="shelf" id="shelf"></div></div>
     <details class="parents">
       <summary>Para os pais</summary>
       <ul>
-        <li><b>Método:</b> fônica sintética. Cada palavra é dividida em sons (c‑a‑t), a tutora fala os sons puros, a criança junta (<i>blending</i>) e descobre a palavra.</li>
-        <li><b>Sons puros:</b> /s/ /m/ /f/ /sh/ são esticados (“sss”, “mmm”). /p/ /t/ /k/ são curtinhos, sem “uh” no final. Isso facilita juntar: “sss‑a‑t” vira “sat”, e não “suh‑a‑tuh”.</li>
-        <li><b>Ordem:</b> vogal A curta → I e O → E e U → SH, CH, TH, CK → encontros consonantais (st, cr, fl…). Os pontinhos embaixo das letras mostram quantos sons tem a palavra; um traço indica duas letras com um som só.</li>
-        <li><b>Recompensas:</b> 1 estrela por palavra (+1 se acertar de primeira). A cada 3 palavras, 1 bilhete de jogo. Jogos novos destravam conforme o total de palavras lidas. As estrelas compram personagens na loja.</li>
-        <li><b>Repetir em voz alta:</b> depois de cada acerto ele repete a palavra; você confirma em “I said it!”.</li>
+        <li><b>Esta semana:</b> fônica de SH, TH e -ING, palavras de memória (all, goes, her, make, too) e o texto de fluência “Fishing”, igual à folha da escola.</li>
+        <li><b>Microfone:</b> depois de acertar, ele fala a palavra e a Miss Lua confere. No texto, ela ouve a frase e marca de verde o que entendeu. Ela confere a palavra, não dá nota de pronúncia som por som. Funciona no Safari; na primeira vez o iPad pede permissão para o microfone.</li>
+        <li><b>Checagem de fluência:</b> no texto, toque em “Fluency check”. Ele lê, você marca as palavras erradas e o app calcula palavras corretas por minuto (a meta do 1º bimestre é 23) e guarda o histórico.</li>
+        <li><b>Método:</b> fônica sintética. A tutora fala os sons puros, sem “uh” no final das consoantes, e a criança junta os sons para formar a palavra.</li>
+        <li><b>Recompensas:</b> 1 estrela por palavra (+1 se acertar de primeira, +1 se falar certo no microfone). A cada 3 palavras, 1 bilhete de jogo. Jogos novos destravam conforme o total de palavras lidas.</li>
         <li>10 a 15 minutos por dia é o ideal. O progresso fica salvo neste aparelho.</li>
       </ul>
       <b>Ouça os sons (para conferir):</b>
@@ -181,8 +233,31 @@ details.parents li{margin-bottom:6px}
       <button class="tool" id="replay">🔊 Sounds</button>
       <button class="tool alt" id="stretchBtn" hidden>🐢 Slowly</button>
     </div>
-    <p class="hint">Which picture is it?</p>
+    <p class="hint" id="pickHint">Which picture is it?</p>
     <div class="choices" id="choices"></div>
+  </section>
+
+  <section class="screen" id="story" hidden>
+    <div class="tutor-row">
+      <div class="tutor" data-tutor></div>
+      <div class="bubble" id="storySay">Let's read “Fishing”!<small>Toque numa palavra para ouvir.</small></div>
+    </div>
+    <div class="tools">
+      <button class="tool" id="stListen">🔊 Listen</button>
+      <button class="tool warm" id="stRead">🎤 Read to Miss Lua</button>
+      <button class="tool alt" id="stFlu">⏱ Fluency check</button>
+    </div>
+    <div class="storybox"><h2>Fishing 🎣</h2><div id="storyText"></div></div>
+    <div class="flu" id="fluPanel" hidden>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span class="clock" id="fluClock">0:00</span>
+        <button class="tool on" id="fluStart">▶ Start</button>
+        <button class="tool warm" id="fluDone" hidden>■ Finish</button>
+      </div>
+      <span class="goal" id="fluHelp">Para os pais: toque em Start quando ele começar a ler. Toque nas palavras que ele errar (ficam vermelhas). Toque em Finish no fim.</span>
+      <div id="fluResult"></div>
+      <div class="tablewrap"><table id="fluHist"></table></div>
+    </div>
   </section>
 
   <section class="screen" id="arcade" hidden>
@@ -224,11 +299,12 @@ details.parents li{margin-bottom:6px}
   <div class="card">
     <div class="pic" id="sayPic"></div>
     <div class="big" id="sayWord"></div>
-    <div class="mic">🎤</div>
-    <h2>Say it out loud!</h2>
-    <p>Fale a palavra em voz alta.</p>
-    <button class="go green" id="saidIt">I said it! ⭐</button>
+    <h2 id="sayTitle">Say it out loud!</h2>
+    <button class="mic" id="micBtn" aria-label="Tap and say the word">🎤</button>
+    <div class="heard" id="heard">Tap the microphone</div>
     <button class="tool alt" id="hearWord">🔊 Hear it again</button>
+    <button class="go green" id="saidIt" hidden>I said it! ⭐</button>
+    <button class="linkbtn" id="parentOk">✓ Pai/mãe: ele falou certo</button>
   </div>
 </div>
 
@@ -253,26 +329,34 @@ const LEVELS=[
  {name:"SH · CH · TH · CK",ex:"fish · chick · duck",sticker:"🏆",words:[["fish","🐟"],["ship","🚢"],["shell","🐚"],["chick","🐥"],["duck","🦆"],["sock","🧦"],["bath","🛁"],["lock","🔒"]]},
  {name:"Blends",ex:"stop · crab · frog",sticker:"🌈",words:[["stop","🛑"],["crab","🦀"],["drum","🥁"],["flag","🚩"],["sled","🛷"],["frog","🐸"],["tent","⛺"],["gift","🎁"]]}
 ];
+const BASE=LEVELS.length;
+const WEEK={name:"This week: SH · TH · -ING",sticker:"🎣",words:[["ship","🚢"],["shop","🏪"],["trash","🗑️"],["fish","🐟"],["bath","🛁"],["fishing","🎣"],["splash","💦"],["wishing","🌠"],["rushing","🏃"]]};
+const SIGHTW=["all","goes","her","make","too","she","the","this","then","says","thin","with"];
+const STORY=["Beth is fishing with Seth.","She is wishing for a big fish.","The fish is thrashing and splashing!","Seth is rushing to help.","Beth sees the fish and grins.","“This is the best thing!” she says.","Then the fish slips!","Splash! Back in it goes!"];
+const HOMO={too:["to","two"],to:["too","two"],beth:["bess","bath","beth's"],seth:["set","seth's","sat"],grins:["grin","greens"],says:["said","sez"],thrashing:["trashing","crashing"],her:["hur"],goes:["go's","gos"],all:["awe"],thin:["think"],with:["width"],the:["a","duh"],then:["than"],fishing:["fission"],splash:["splashed"],ship:["shipped"],shop:["shopped"]};
 const GAMES=[
  {id:"race",name:"Turbo Race",pic:"🏎️",need:0,bg:"linear-gradient(135deg,#FF8A3D,#FF4F5E)",hint:"Tap ⬅️ left or right ➡️"},
  {id:"run",name:"Jungle Run",pic:"🐇",need:6,bg:"linear-gradient(135deg,#43C66B,#1F9D78)",hint:"Tap to jump! Tap twice = big jump"},
  {id:"pop",name:"Balloon Party",pic:"🎈",need:12,bg:"linear-gradient(135deg,#FF6FB5,#B35CFF)",hint:"Pop! Gold balloons = 5 stars"},
  {id:"space",name:"Space Rocket",pic:"🚀",need:20,bg:"linear-gradient(135deg,#3A3F9E,#141B3D)",hint:"Slide your finger to steer"},
- {id:"ocean",name:"Deep Sea",pic:"🐠",need:28,bg:"linear-gradient(135deg,#1FA2E0,#0B5FA5)",hint:"Tap to swim up"}
+ {id:"ocean",name:"Deep Sea",pic:"🐠",need:28,bg:"linear-gradient(135deg,#1FA2E0,#0B5FA5)",hint:"Tap to swim up"},
+ {id:"fishing",name:"Gone Fishing",pic:"🎣",need:36,bg:"linear-gradient(135deg,#2BB3A3,#1E6FB8)",hint:"Tap where you want to drop the hook"}
 ];
 const SHOP={
  race:{label:"Cars",items:[["🚗",0],["🚙",4],["🚕",6],["🏎️",10],["🚓",14],["🚒",18],["🚜",24]]},
  run:{label:"Runners",items:[["🐇",0],["🐕",4],["🐈",6],["🐿️",10],["🦔",14],["🦄",20],["🦖",30]]},
  space:{label:"Rockets",items:[["🚀",0],["🛸",12],["🛰️",22]]},
- ocean:{label:"Swimmers",items:[["🐠",0],["🐡",6],["🐢",12],["🐬",18],["🦈",26]]}
+ ocean:{label:"Swimmers",items:[["🐠",0],["🐡",6],["🐢",12],["🐬",18],["🦈",26]]},
+ fishing:{label:"Boats",items:[["🚣",0],["🛶",8],["⛵",14],["🚤",20],["🛥️",28]]}
 };
 const PRAISE=["p1","p2","p3","p4","p5","p6"];
-const KEYWORD={a:"cat",e:"bed",i:"pig",o:"dog",u:"bug",b:"bat",c:"cat",d:"dog",f:"fish",g:"gift",h:"hat",k:"kid",l:"lip",m:"map",n:"pan",p:"pig",r:"rat",s:"sun",t:"ten",v:"van",w:"web",z:"zoo",sh:"ship",ch:"chick",th:"bath",ck:"duck",x:"fox"};
-const G2P={a:"æ",e:"ɛ",i:"ɪ",o:"ɑ",u:"ʌ",b:"b",c:"k",d:"d",f:"f",g:"ɡ",h:"h",k:"k",l:"l",m:"m",n:"n",p:"p",r:"ɹ",s:"s",t:"t",v:"v",w:"w",z:"z",sh:"ʃ",ch:"ʧ",th:"θ",ck:"k",x:"ks"};
+const KEYWORD={a:"cat",e:"bed",i:"pig",o:"dog",u:"bug",b:"bat",c:"cat",d:"dog",f:"fish",g:"gift",h:"hat",k:"kid",l:"lip",m:"map",n:"pan",p:"pig",r:"rat",s:"sun",t:"ten",v:"van",w:"web",z:"zoo",sh:"ship",ch:"chick",th:"bath",ck:"duck",x:"fox",ing:"fishing"};
+const G2P={a:"æ",e:"ɛ",i:"ɪ",o:"ɑ",u:"ʌ",b:"b",c:"k",d:"d",f:"f",g:"ɡ",h:"h",k:"k",l:"l",m:"m",n:"n",p:"p",r:"ɹ",s:"s",t:"t",v:"v",w:"w",z:"z",sh:"ʃ",ch:"ʧ",th:"θ",ck:"k",x:"ks",ing:"ɪŋ"};
 
 const KEY="missLuaSave2";
-let save={stars:0,tickets:0,words:0,unlocked:1,done:[],stickers:[],best:{},plays:{},owned:{race:["🚗"],run:["🐇"],space:["🚀"],ocean:["🐠"]},sel:{race:"🚗",run:"🐇",space:"🚀",ocean:"🐠"},seen:["race"],muted:false};
+let save={stars:0,tickets:0,words:0,unlocked:1,done:[],stickers:[],best:{},plays:{},owned:{race:["🚗"],run:["🐇"],space:["🚀"],ocean:["🐠"],fishing:["🚣"]},sel:{race:"🚗",run:"🐇",space:"🚀",ocean:"🐠",fishing:"🚣"},seen:["race"],muted:false,flu:[]};
 try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s){save=Object.assign(save,s);}}catch(e){}
+save.owned.fishing=save.owned.fishing||["🚣"];save.sel.fishing=save.sel.fishing||"🚣";save.flu=save.flu||[];
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(save));}catch(e){}}
 
 const $=id=>document.getElementById(id);
@@ -298,41 +382,32 @@ document.querySelectorAll("[data-tutor]").forEach(el=>el.innerHTML=TUTOR);
 function talking(on){document.querySelectorAll("[data-tutor]").forEach(el=>el.classList.toggle("talking",on));}
 
 /* ---------- audio ---------- */
-let AC=null,voiceGain,sfxGain,musicGain;
-const BUF={};
+let AC=null,sfxGain,musicGain;
 function initAudio(){
   if(AC) return;
   try{
     AC=new (window.AudioContext||window.webkitAudioContext)();
-    voiceGain=AC.createGain();voiceGain.gain.value=1;voiceGain.connect(AC.destination);
     sfxGain=AC.createGain();sfxGain.gain.value=.5;sfxGain.connect(AC.destination);
     musicGain=AC.createGain();musicGain.gain.value=save.muted?0:.16;musicGain.connect(AC.destination);
   }catch(e){AC=null;}
 }
-function b64buf(b){const s=atob(b);const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u.buffer;}
-function getBuf(k){
-  if(BUF[k]) return BUF[k];
-  const d=window.AUDIO&&AUDIO[k]; if(!d||!AC) return Promise.resolve(null);
-  BUF[k]=new Promise(res=>{try{AC.decodeAudioData(b64buf(d),b=>res(b),()=>res(null));}catch(e){res(null);}});
-  return BUF[k];
-}
-function preload(){if(!window.AUDIO)return;Object.keys(AUDIO).forEach((k,i)=>setTimeout(()=>getBuf(k),i*15));}
 /* Voice plays through one media element: on iPhone/iPad media audio still plays in silent mode, Web Audio does not. */
 const voiceEl=new Audio(); voiceEl.preload="auto"; voiceEl.setAttribute("playsinline","");
 let sess=0,curRes=null;
-function play(key,talk=true){
+function play(key,talk=true,onStart){
   const d=window.AUDIO&&AUDIO[key]; if(!d) return Promise.resolve();
   return new Promise(res=>{
-    let done=false;
-    const fin=()=>{if(done)return;done=true;voiceEl.onended=voiceEl.onerror=null;if(curRes===fin)curRes=null;talking(false);res();};
+    let done=false,started=false;
+    const fin=()=>{if(done)return;done=true;voiceEl.onended=voiceEl.onerror=voiceEl.onplaying=null;if(curRes===fin)curRes=null;talking(false);res();};
     curRes=fin; voiceEl.onended=fin; voiceEl.onerror=fin;
+    voiceEl.onplaying=()=>{if(started)return;started=true;onStart&&onStart();};
     voiceEl.src="data:audio/mpeg;base64,"+d;
     if(talk) talking(true);
     const p=voiceEl.play(); if(p&&p.catch) p.catch(fin);
-    setTimeout(fin,9000);
+    setTimeout(fin,15000);
   });
 }
-function hush(){sess++;try{voiceEl.pause();}catch(e){}talking(false);if(curRes){const r=curRes;curRes=null;r();}}
+function hush(){sess++;try{voiceEl.pause();}catch(e){}talking(false);if(curRes){const r=curRes;curRes=null;r();}stopListening();}
 function wakeAudio(){
   try{if(navigator.audioSession)navigator.audioSession.type="playback";}catch(e){}
   if(AC&&AC.state!=="running"){try{AC.resume();}catch(e){}}
@@ -359,6 +434,7 @@ const SFX={
   jump(){tone(400,.18,"square",.08,0,2.2);},
   swim(){tone(300,.15,"sine",.15,0,1.8);},
   boost(){tone(200,.5,"sawtooth",.12,0,4);},
+  splash(){noise(.35,.35,600);},
   fanfare(){[523,659,784,1047].forEach((f,i)=>tone(f,.25,"square",.1,i*.12));tone(1047,.6,"triangle",.15,.5);},
   tap(){tone(700,.05,"triangle",.1);}
 };
@@ -384,8 +460,38 @@ function musicStop(){clearInterval(musicTimer);musicTimer=null;}
 $("muteBtn").onclick=()=>{save.muted=!save.muted;persist();if(musicGain)musicGain.gain.value=save.muted?0:.16;$("muteBtn").textContent=save.muted?"🔇":"🎵";};
 $("muteBtn").textContent=save.muted?"🔇":"🎵";
 
+/* ---------- listening (speech recognition built into Safari/Chrome) ---------- */
+const SRec=window.SpeechRecognition||window.webkitSpeechRecognition;
+let rec=null,micBlocked=false;
+function norm(s){return (s||"").toLowerCase().replace(/[“”"'.,!?;:]/g," ").split(/\s+/).filter(Boolean);}
+function stopListening(){if(rec){try{rec.abort();}catch(e){}rec=null;}}
+function listen(ms,onWords){
+  return new Promise(res=>{
+    if(!SRec||micBlocked){res({error:"unsupported",texts:[]});return;}
+    try{voiceEl.pause();}catch(e){}
+    const r=new SRec(); rec=r; r.lang="en-US"; r.interimResults=true; r.maxAlternatives=5; r.continuous=!!onWords;
+    let texts=[],done=false;
+    const fin=err=>{if(done)return;done=true;try{r.stop();}catch(e){}if(rec===r)rec=null;res({error:err,texts});};
+    r.onresult=e=>{
+      texts=[];
+      for(let i=0;i<e.results.length;i++){const R=e.results[i];for(let j=0;j<R.length;j++)texts.push(R[j].transcript);}
+      if(onWords&&onWords(texts)) fin();
+      else if(!onWords&&e.results[e.results.length-1].isFinal) fin();
+    };
+    r.onerror=e=>{if(e.error==="not-allowed"||e.error==="service-not-allowed")micBlocked=true;fin(e.error||"error");};
+    r.onend=()=>fin();
+    try{r.start();}catch(e){fin("start");}
+    setTimeout(()=>fin(),ms);
+  });
+}
+function heardWord(target,texts){
+  const ok=[target,...(HOMO[target]||[])];
+  for(const t of texts){if(norm(t).some(w=>ok.includes(w)))return true;}
+  return false;
+}
+
 /* ---------- screens ---------- */
-const SCREENS=["home","lesson","arcade","shop","game"];
+const SCREENS=["home","lesson","story","arcade","shop","game"];
 function show(id){SCREENS.forEach(s=>$(s).hidden=s!==id);$("homeBtn").hidden=id==="home";window.scrollTo(0,0);}
 function updateBar(){$("stars").textContent=save.stars;$("tickets").textContent=save.tickets;}
 function bump(id){const e=$(id);e.classList.remove("bump");void e.offsetWidth;e.classList.add("bump");}
@@ -395,10 +501,11 @@ function message(pic,title,text,btn,fn,btn2,fn2){
   $("msgBtn2").hidden=!btn2; if(btn2){$("msgBtn2").textContent=btn2;$("msgBtn2").onclick=()=>{$("msgOv").hidden=true;fn2&&fn2();};}
   $("msgOv").hidden=false;$("msgBtn").onclick=()=>{$("msgOv").hidden=true;fn&&fn();};
 }
+function addStars(n,el){save.stars+=n;floater("+"+n+" ⭐",el||$("starPill"));bump("starPill");persist();updateBar();}
 
 /* ---------- home ---------- */
 function renderHome(){
-  hush(); stopGame(); L=null; $("msgOv").hidden=true; $("sayItOv").hidden=true;
+  hush(); stopGame(); stopFlu(); L=null; $("msgOv").hidden=true; $("sayItOv").hidden=true;
   const box=$("levels");box.innerHTML="";
   LEVELS.forEach((lv,i)=>{
     const b=document.createElement("button");const locked=i>=save.unlocked;
@@ -407,45 +514,62 @@ function renderHome(){
     b.onclick=()=>{if(locked){hush();play("t:locked");return;}startLevel(i);};
     box.appendChild(b);
   });
-  $("shelf").innerHTML=LEVELS.map((lv,i)=>`<span class="${save.stickers.includes(i)?"got":""}">${save.stickers.includes(i)?lv.sticker:""}</span>`).join("");
+  const all=[...LEVELS.map(l=>l.sticker),WEEK.sticker];
+  $("shelf").innerHTML=all.map((s,i)=>`<span class="${save.stickers.includes(i)?"got":""}">${save.stickers.includes(i)?s:""}</span>`).join("");
   $("ticketBadge").hidden=!save.tickets;$("ticketBadge").textContent=save.tickets+" 🎟️";
   const nextG=GAMES.find(g=>save.words<g.need);
   $("arcadeSub").textContent=save.tickets?"Tap to play!":(nextG?`${nextG.need-save.words} words → new game`:"3 words = 1 ticket");
   updateBar();show("home");
 }
 function buildSoundGrid(){
-  const keys=["a","e","i","o","u","b","c","d","f","g","h","k","l","m","n","p","r","s","t","v","w","z","sh","ch","th","ck","x"];
+  const keys=["a","e","i","o","u","b","c","d","f","g","h","k","l","m","n","p","r","s","t","v","w","z","sh","ch","th","ck","x","ing"];
   $("sndgrid").innerHTML=keys.map(k=>`<button data-k="${k}">${k}<small>${KEYWORD[k]}</small></button>`).join("");
-  $("sndgrid").querySelectorAll("button").forEach(b=>b.onclick=()=>{initAudio();hush();play("ph:"+G2P[b.dataset.k],false);});
+  $("sndgrid").querySelectorAll("button").forEach(b=>b.onclick=()=>{hush();play("ph:"+G2P[b.dataset.k],false);});
 }
 $("toArcade").onclick=()=>openArcade(false);
 $("toShop").onclick=()=>openShop("race");
 $("homeBtn").onclick=renderHome;
+$("wkPhonics").onclick=()=>startLevel(BASE);
+$("wkSight").onclick=startSight;
+$("wkStory").onclick=openStory;
 
-/* ---------- lesson ---------- */
+/* ---------- lesson (phonics + sight words) ---------- */
 let L=null;
-function startLevel(i){hush();L={lv:i,queue:shuffle(LEVELS[i].words),idx:0,since:0,busy:false,tries:0};show("lesson");round();}
+function levelData(i){return i===BASE?WEEK:LEVELS[i];}
+function startLevel(i){hush();L={kind:"phonics",lv:i,queue:shuffle(levelData(i).words),idx:0,since:0,busy:false,tries:0};show("lesson");round();}
+function startSight(){hush();L={kind:"sight",lv:"sight",queue:shuffle(SIGHTW).slice(0,8).map(w=>[w,"👀"]),idx:0,since:0,busy:false,tries:0};show("lesson");round(true);}
 function bubble(t){$("say").textContent=t;}
 function wordData(w){return (window.PHON&&PHON[w])||{g:w.split(""),p:w.split("").map(c=>G2P[c])};}
-async function playSounds(w,sid,gap=280){
+async function playSounds(w,sid){
   const d=wordData(w),tiles=[...document.querySelectorAll("#word .tile")];
-  for(let k=0;k<d.p.length;k++){
-    if(sid!==sess) return;
-    tiles.forEach(t=>t.classList.remove("lit")); if(tiles[k]) tiles[k].classList.add("lit");
-    await play("ph:"+d.p[k]); await wait(gap);
-  }
-  tiles.forEach(t=>t.classList.remove("lit"));
+  const lit=k=>{if(sid!==sess)return;tiles.forEach(t=>t.classList.remove("lit"));if(tiles[k])tiles[k].classList.add("lit");};
+  let timers=[];
+  await play("so:"+w,true,()=>{timers=(d.t||[]).map((t,k)=>setTimeout(()=>lit(k),Math.max(0,t*1000-60)));});
+  timers.forEach(clearTimeout); tiles.forEach(t=>t.classList.remove("lit"));
 }
-async function round(){
+async function round(intro){
   hush(); const sid=sess; L.busy=false; L.tries=0;
-  const [w]=L.queue[L.idx]; const d=wordData(w); const mode=L.idx%2===0?"listen":"read";
+  const [w]=L.queue[L.idx];
   $("progress").innerHTML=L.queue.map((_,k)=>`<i class="${k<L.idx?"on":""}"></i>`).join("");
+  $("stretchBtn").hidden=true;
+  if(L.kind==="sight"){
+    $("word").innerHTML=""; $("replay").textContent="🔊 Hear it"; $("pickHint").textContent="Find the word!";
+    const others=shuffle(SIGHTW.filter(x=>x!==w)).slice(0,2);
+    $("choices").innerHTML=shuffle([w,...others]).map(o=>`<button class="choice wordc" data-w="${o}">${o}</button>`).join("");
+    document.querySelectorAll(".choice").forEach(c=>c.onclick=()=>pick(c,w));
+    bubble("Find the word! 👀");
+    if(intro){await play("t:findintro");if(sid!==sess)return;}
+    await play("t:find"); if(sid!==sess) return; await play("w:"+w);
+    return;
+  }
+  const d=wordData(w); const mode=L.idx%2===0?"listen":"read";
+  $("replay").textContent="🔊 Sounds"; $("pickHint").textContent="Which picture is it?";
   $("word").innerHTML=d.g.map((g,k)=>`<button class="tile${g.length>1?" multi":""}" data-k="${k}" aria-label="sound ${g}">${g}</button>`).join("");
-  document.querySelectorAll("#word .tile").forEach(t=>t.onclick=async()=>{hush();t.classList.add("lit");await play("ph:"+d.p[+t.dataset.k]);t.classList.remove("lit");});
-  const others=shuffle(LEVELS[L.lv].words.filter(x=>x[0]!==w)).slice(0,2);
+  document.querySelectorAll("#word .tile").forEach(t=>t.onclick=async()=>{hush();t.classList.add("lit");await play("ph:"+d.p[+t.dataset.k]);t.classList.remove("lit");if(d.g[+t.dataset.k]==="ing")play("t:ing");});
+  const others=shuffle(levelData(L.lv).words.filter(x=>x[0]!==w)).slice(0,2);
   $("choices").innerHTML=shuffle([L.queue[L.idx],...others]).map(o=>`<button class="choice" data-w="${o[0]}" aria-label="picture choice">${o[1]}</button>`).join("");
   document.querySelectorAll(".choice").forEach(c=>c.onclick=()=>pick(c,w));
-  $("stretchBtn").hidden=true;
+  if(L.lv===BASE&&L.idx===0){await play("t:week");if(sid!==sess)return;}
   if(mode==="listen"){
     bubble("Listen to the sounds… then push them together!");
     await play("t:listen"); if(sid!==sess) return;
@@ -463,39 +587,165 @@ async function pick(btn,w){
     L.busy=true; btn.classList.add("right"); SFX.ding(); L.firstTry=L.tries===0;
     bubble(w+"! "+(L.firstTry?"First try! ⭐⭐":"You got it! ⭐"));
     await play("w:"+w); if(sid!==sess) return;
-    await wait(200); await playSounds(w,sid,160); if(sid!==sess) return;
-    await play("w:"+w); if(sid!==sess) return;
+    if(L.kind==="phonics"){await wait(150);await playSounds(w,sid);if(sid!==sess)return;await play("w:"+w);if(sid!==sess)return;}
     await play("t:"+pickOne(PRAISE)); if(sid!==sess) return;
-    await play("t:say"); if(sid!==sess) return;
-    $("sayPic").textContent=btn.textContent; $("sayWord").textContent=w; $("sayItOv").hidden=false;
+    openSayIt(w,L.kind==="sight"?"👀":btn.textContent);
   }else{
     L.tries++; btn.classList.add("wrong"); SFX.bonk();
     bubble("Oops! Listen again…");
     await play("t:wrong"); if(sid!==sess) return;
-    await playSounds(w,sid,400); if(sid!==sess) return;
+    if(L.kind==="sight"){await play("w:"+w);return;}
+    await playSounds(w,sid); if(sid!==sess) return;
     if(L.tries>=2){$("stretchBtn").hidden=false;await play("t:slowly");if(sid!==sess)return;await play("ws:"+w);}
   }
 }
-$("replay").onclick=()=>{hush();playSounds(L.queue[L.idx][0],sess,300);};
+$("replay").onclick=()=>{hush();const w=L.queue[L.idx][0];if(L.kind==="sight")play("w:"+w);else playSounds(w,sess);};
 $("stretchBtn").onclick=()=>{hush();play("ws:"+L.queue[L.idx][0]);};
-$("hearWord").onclick=()=>{hush();play("w:"+L.queue[L.idx][0]);};
-$("saidIt").onclick=()=>{
+
+/* say-it with the microphone */
+let sayTries=0,sayWordNow="";
+function openSayIt(w,pic){
+  sayTries=0; sayWordNow=w;
+  $("sayPic").textContent=pic; $("sayWord").textContent=w; $("sayTitle").textContent="Say it out loud!";
+  const canMic=!!SRec&&!micBlocked;
+  $("micBtn").hidden=!canMic; $("saidIt").hidden=canMic; $("parentOk").hidden=!canMic;
+  $("heard").className="heard"; $("heard").textContent=canMic?"Tap the microphone 🎤":"";
+  $("sayItOv").hidden=false;
+  play(canMic?"t:tapmic":"t:say");
+}
+$("micBtn").onclick=async()=>{
+  if(rec) return;
+  hush(); const sid=sess;
+  $("micBtn").classList.add("listening"); $("heard").className="heard"; $("heard").textContent="Listening… 👂";
+  const r=await listen(5000);
+  $("micBtn").classList.remove("listening");
+  if(sid!==sess) return;
+  if(r.error==="not-allowed"||r.error==="service-not-allowed"||r.error==="unsupported"||r.error==="start"){
+    $("heard").textContent="Microfone bloqueado. Confirme você:"; $("micBtn").hidden=true; $("saidIt").hidden=false; $("parentOk").hidden=true; return;
+  }
+  const said=(r.texts[0]||"").trim();
+  if(heardWord(sayWordNow,r.texts)){
+    $("heard").className="heard good"; $("heard").textContent="I heard: "+sayWordNow+" ✅";
+    SFX.ding(); confetti(); await play("t:perfect"); if(sid!==sess) return;
+    finishWord(1);
+  }else{
+    sayTries++;
+    $("heard").className="heard bad"; $("heard").textContent=said?`I heard: “${said}”`:"I didn't hear you. 🙉";
+    if(sayTries>=3){await play("t:practice");if(sid!==sess)return;await play("w:"+sayWordNow);if(sid!==sess)return;finishWord(0);return;}
+    await play("t:almost"); if(sid!==sess) return;
+    if(L&&L.kind==="phonics"){await play("so:"+sayWordNow);if(sid!==sess)return;}
+    await play("w:"+sayWordNow);
+  }
+};
+$("hearWord").onclick=()=>{hush();play("w:"+sayWordNow);};
+$("saidIt").onclick=()=>finishWord(0);
+$("parentOk").onclick=()=>finishWord(1);
+function finishWord(micBonus){
   hush(); $("sayItOv").hidden=true; confetti();
-  const gain=L.firstTry?2:1; save.stars+=gain; save.words++; L.idx++; L.since++;
-  floater("+"+gain+" ⭐",$("starPill")); bump("starPill");
+  const gain=(L.firstTry?2:1)+micBonus; save.words++; L.idx++; L.since++;
+  addStars(gain);
   let ticket=false; if(L.since>=3){L.since=0;save.tickets++;ticket=true;setTimeout(()=>{floater("+1 🎟️",$("ticketPill"));bump("ticketPill");},300);}
   persist(); updateBar();
   if(L.idx>=L.queue.length){levelDone();return;}
   if(ticket){setTimeout(()=>openArcade(true),600);return;}
   round();
-};
+}
 function levelDone(){
-  const i=L.lv;
-  if(!save.done.includes(i)) save.done.push(i);
-  if(!save.stickers.includes(i)) save.stickers.push(i);
-  save.unlocked=Math.max(save.unlocked,Math.min(LEVELS.length,i+2)); save.tickets++; persist(); updateBar();
+  const i=L.lv; let sticker="🌟";
+  if(typeof i==="number"){
+    if(!save.done.includes(i)) save.done.push(i);
+    if(!save.stickers.includes(i)) save.stickers.push(i);
+    if(i<BASE) save.unlocked=Math.max(save.unlocked,Math.min(BASE,i+2));
+    sticker=levelData(i).sticker;
+  }
+  save.tickets++; persist(); updateBar();
   confetti(); SFX.fanfare(); play("t:level");
-  message(LEVELS[i].sticker,"Level complete!","Novo adesivo + 1 bilhete bônus! 🎟️","🎮 Play a game",()=>{L=null;openArcade(true);});
+  message(sticker,"Level complete!","Mais 1 bilhete bônus! 🎟️","🎮 Play a game",()=>{L=null;openArcade(true);});
+}
+
+/* ---------- story ---------- */
+let storyBusy=false;
+function renderStory(){
+  $("storyText").innerHTML=STORY.map((s,i)=>`<p class="sent" data-i="${i}">`+s.split(" ").map(tok=>{const w=norm(tok)[0]||"";return `<span class="sw" data-w="${w}">${tok}</span>`;}).join(" ")+`</p>`).join("");
+  $("storyText").querySelectorAll(".sw").forEach(s=>s.onclick=()=>{
+    if(flu.on){s.classList.toggle("err");return;}
+    if(storyBusy) return;
+    hush(); s.classList.add("tap"); play("w:"+s.dataset.w).then(()=>s.classList.remove("tap"));
+  });
+}
+function openStory(){
+  hush(); renderStory(); stopFlu(); $("fluPanel").hidden=true; renderFluHist();
+  $("storySay").innerHTML="Let's read “Fishing”!<small>Toque numa palavra para ouvir.</small>";
+  show("story"); play("t:story");
+}
+function curSent(i){$("storyText").querySelectorAll(".sent").forEach(p=>p.classList.toggle("cur",+p.dataset.i===i));}
+$("stListen").onclick=async()=>{
+  hush(); stopFlu(); const sid=sess; storyBusy=true;
+  for(let i=0;i<STORY.length;i++){curSent(i);await play("s:"+i);if(sid!==sess)break;await wait(250);}
+  curSent(-1); storyBusy=false;
+};
+$("stRead").onclick=async()=>{
+  hush(); stopFlu(); const sid=sess;
+  if(!SRec||micBlocked){message("🎤","Microfone indisponível","Abra o app pelo Safari no iPad e permita o microfone. Aqui você pode usar o Fluency check.","OK");return;}
+  renderStory(); storyBusy=true;
+  $("storySay").innerHTML="Read each sentence to me! 🎤<small>Leia cada frase em voz alta.</small>";
+  await play("t:storyturn"); if(sid!==sess){storyBusy=false;return;}
+  let good=0;
+  for(let i=0;i<STORY.length;i++){
+    if(sid!==sess) break;
+    curSent(i);
+    const spans=[...$("storyText").querySelectorAll(`.sent[data-i="${i}"] .sw`)];
+    const targets=spans.map(s=>s.dataset.w);
+    const mark=texts=>{
+      const heard=[];texts.forEach(t=>heard.push(...norm(t)));
+      let all=true;
+      spans.forEach((s,k)=>{const ok=[targets[k],...(HOMO[targets[k]]||[])].some(x=>heard.includes(x));if(ok)s.classList.add("ok");else all=false;});
+      return all;
+    };
+    const r=await listen(3500+targets.length*900,mark);
+    if(sid!==sess) break;
+    if(r.error==="not-allowed"||r.error==="service-not-allowed"){message("🎤","Microfone bloqueado","Permita o microfone para este site nos Ajustes do Safari.","OK");break;}
+    const missed=spans.filter(s=>!s.classList.contains("ok"));
+    missed.forEach(s=>s.classList.add("miss"));
+    if(missed.length<=Math.floor(spans.length/3)){good++;SFX.coin();}
+    if(missed.length===0){await play("t:nicesent");}
+    else{
+      await play("t:missed"); if(sid!==sess) break;
+      for(const s of missed.slice(0,3)){s.classList.add("tap");await play("w:"+s.dataset.w);s.classList.remove("tap");if(sid!==sess)break;await wait(150);}
+      if(sid!==sess) break;
+      await play("s:"+i);
+    }
+    await wait(300);
+  }
+  curSent(-1); storyBusy=false;
+  if(sid!==sess) return;
+  save.words+=good; addStars(good+2); save.tickets++; persist(); updateBar(); confetti(); SFX.fanfare();
+  await play("t:storydone");
+  message("🎣","You read the story!",`${good} de ${STORY.length} frases bem lidas. +1 bilhete 🎟️`,"🎮 Play a game",()=>openArcade(true),"🔁 Read again",()=>$("stRead").click());
+};
+
+/* fluency check for parents */
+const flu={on:false,t0:0,timer:null};
+$("stFlu").onclick=()=>{hush();$("fluPanel").hidden=!$("fluPanel").hidden;renderStory();stopFlu();$("fluResult").innerHTML="";if(!$("fluPanel").hidden)$("fluPanel").scrollIntoView({behavior:"smooth",block:"nearest"});};
+$("fluStart").onclick=()=>{
+  hush(); renderStory(); flu.on=true; flu.t0=performance.now();
+  $("fluStart").hidden=true; $("fluDone").hidden=false; $("fluResult").innerHTML="";
+  flu.timer=setInterval(()=>{const s=Math.floor((performance.now()-flu.t0)/1000);$("fluClock").textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0");},250);
+  $("storyText").scrollIntoView({behavior:"smooth",block:"start"});
+};
+$("fluDone").onclick=()=>{
+  const secs=Math.max(1,(performance.now()-flu.t0)/1000);
+  const total=$("storyText").querySelectorAll(".sw").length, errs=$("storyText").querySelectorAll(".sw.err").length, correct=total-errs;
+  const wcpm=Math.round(correct/(secs/60));
+  stopFlu();
+  const d=new Date(); save.flu.push({d:d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}),c:correct,e:errs,s:Math.round(secs),w:wcpm}); persist();
+  $("fluResult").innerHTML=`<b>${correct} palavras certas, ${errs} erros, ${Math.floor(secs/60)}:${String(Math.round(secs)%60).padStart(2,"0")}.</b><br>${wcpm} palavras certas por minuto ${wcpm>=23?"✅ meta alcançada!":"(meta: 23)"}`;
+  renderFluHist(); if(wcpm>=23){confetti();SFX.fanfare();}
+};
+function stopFlu(){flu.on=false;clearInterval(flu.timer);$("fluStart").hidden=false;$("fluDone").hidden=true;$("fluClock").textContent="0:00";}
+function renderFluHist(){
+  const h=save.flu.slice(-8).reverse();
+  $("fluHist").innerHTML=h.length?`<tr><th>Dia</th><th>Certas</th><th>Erros</th><th>Tempo</th><th>Por min</th></tr>`+h.map(r=>`<tr><td>${r.d}</td><td>${r.c}</td><td>${r.e}</td><td>${Math.floor(r.s/60)}:${String(r.s%60).padStart(2,"0")}</td><td><b>${r.w}</b></td></tr>`).join(""):"";
 }
 
 /* ---------- arcade ---------- */
@@ -522,8 +772,7 @@ function openArcade(fromLesson){
 }
 function continueReading(){
   if(L&&L.idx<L.queue.length){show("lesson");round();return;}
-  const next=LEVELS.findIndex((_,k)=>k<save.unlocked&&!save.done.includes(k));
-  startLevel(next>=0?next:Math.floor(Math.random()*save.unlocked));
+  renderHome();
 }
 $("keepReading").onclick=continueReading;
 
@@ -594,10 +843,10 @@ function frame(now){
   G.raf=requestAnimationFrame(frame);
 }
 function endGame(){
-  const g=G.g,sc=G.score,best=save.best[g.id]||0,rec=sc>best; G.running=false; musicStop();
-  if(rec) save.best[g.id]=sc; persist(); confetti(); SFX.fanfare(); play("t:gameend");
+  const g=G.g,sc=G.score,best=save.best[g.id]||0,rec2=sc>best; G.running=false; musicStop();
+  if(rec2) save.best[g.id]=sc; persist(); confetti(); SFX.fanfare(); play("t:gameend");
   const nextG=GAMES.find(x=>save.words<x.need);
-  message(rec?"🏆":"🎉",sc+" stars!",(rec?"Novo recorde! ":"Recorde: "+best+". ")+(nextG?`Próximo jogo (${nextG.name}) em ${nextG.need-save.words} palavras.`:""),
+  message(rec2?"🏆":"🎉",sc+" stars!",(rec2?"Novo recorde! ":"Recorde: "+best+". ")+(nextG?`Próximo jogo (${nextG.name}) em ${nextG.need-save.words} palavras.`:""),
     "📖 Read more",()=>{G=null;continueReading();},
     save.tickets?`🎮 Play again (${save.tickets} 🎟️)`:"🏠 Home",()=>{G=null;if(save.tickets)openArcade(false);else renderHome();});
 }
@@ -757,6 +1006,46 @@ STEP.ocean=(d,dt)=>{
   drawE(save.sel.ocean,p.x,p.y,62,Math.max(-.5,Math.min(.5,p.vy/600)),true,p.inv>0&&Math.floor(G.t*16)%2?.35:1);
 };
 
+/* GONE FISHING */
+const FISH=[["🐟",1,.4],["🐠",2,.3],["🐡",2,.15],["🦐",1,.1],["🐙",3,.05]];
+function pickFish(){let r=Math.random();for(const f of FISH){if((r-=f[2])<=0)return f;}return FISH[0];}
+INIT.fishing=()=>{G.wl=H*.24;G.p={x:W/2,tx:W/2,state:"idle",hx:W/2,hy:0,c:null};G.bub=[...Array(18)].map(()=>({x:rand(0,W),y:rand(G.wl,H),r:rand(2,5),v:rand(15,40)}));};
+INPUT.fishing={down(x){const p=G.p;if(p.state!=="idle")return;p.tx=Math.max(30,Math.min(W-30,x));p.state="move";SFX.tap();},key(k){if(k===" "||k==="ArrowDown"){if(G.p.state==="idle"){G.p.state="down";G.p.hx=G.p.x+20;}return true;}if(k==="ArrowLeft"||k==="ArrowRight"){G.p.tx=Math.max(30,Math.min(W-30,G.p.x+(k==="ArrowLeft"?-60:60)));if(G.p.state==="idle")G.p.state="move";return true;}}};
+STEP.fishing=(d,dt)=>{
+  const p=G.p,wl=G.wl;
+  if(d>0){G.spawn-=d;if(G.spawn<=0){G.spawn=rand(.5,.9)/G.spd;const dir=Math.random()<.5?1:-1,[e,v]=Math.random()<.12?["👢",0]:pickFish();
+    G.objs.push({e,v,dir,x:dir>0?-40:W+40,y:rand(wl+70,H-40),sp:rand(60,130)*G.spd,ph:rand(0,6)});}}
+  G.objs.forEach(o=>{o.x+=o.dir*o.sp*d;o.y+=Math.sin(G.t*3+o.ph)*12*dt;});
+  G.objs=G.objs.filter(o=>o.x>-60&&o.x<W+60);
+  if(p.state==="move"){p.x+=(p.tx-p.x)*Math.min(1,dt*10);if(Math.abs(p.tx-p.x)<4){p.x=p.tx;p.state="down";p.hx=p.x+20;SFX.splash();burst(p.hx,wl,["#fff","#9BE3FF"],10,160,4);}}
+  else if(p.state==="down"){p.hy+=560*dt;const hookY=wl+p.hy;
+    for(let i=0;i<G.objs.length;i++){const o=G.objs[i];if(Math.hypot(o.x-p.hx,o.y-hookY)<34){p.c=o;G.objs.splice(i,1);p.state="up";if(o.e==="👢")SFX.bonk();else SFX.coin();break;}}
+    if(hookY>H-20)p.state="up";}
+  else if(p.state==="up"){p.hy-=(p.c?360:620)*dt;if(p.hy<=0){p.hy=0;
+      if(p.c){if(p.c.e==="👢"){hurt(p.hx,wl);ftext(p.hx,wl-20,"Oops! A boot!","#fff",28);}else{score(p.hx,wl-30,p.c.v);burst(p.hx,wl,["#fff","#9BE3FF"],14,220,5);}}
+      p.c=null;p.state="idle";}}
+  // sky
+  const sg=ctx.createLinearGradient(0,0,0,wl);sg.addColorStop(0,"#8FD8FF");sg.addColorStop(1,"#DDF4FF");ctx.fillStyle=sg;ctx.fillRect(-20,-20,W+40,wl+20);
+  ctx.fillStyle="#FFE066";ctx.beginPath();ctx.arc(W-60,46,26,0,7);ctx.fill();
+  drawE("☁️",W*.25+Math.sin(G.t*.3)*20,36,52,0,false,.95);
+  // water
+  const wg=ctx.createLinearGradient(0,wl,0,H);wg.addColorStop(0,"#3CC4E8");wg.addColorStop(1,"#0B4F8F");ctx.fillStyle=wg;ctx.fillRect(-20,wl,W+40,H-wl+20);
+  ctx.fillStyle="rgba(255,255,255,.5)";ctx.beginPath();ctx.moveTo(-20,wl);for(let x=-20;x<=W+20;x+=10)ctx.lineTo(x,wl+Math.sin(x/22+G.t*3)*3);ctx.lineTo(W+20,wl+8);ctx.lineTo(-20,wl+8);ctx.fill();
+  G.bub.forEach(b=>{b.y-=b.v*dt;if(b.y<wl+6){b.y=H;b.x=rand(0,W);}ctx.strokeStyle="rgba(255,255,255,.5)";ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,7);ctx.stroke();});
+  for(let i=0;i<6;i++)drawE(i%2?"🌿":"🪸",(i+.5)*W/6,H-16+Math.sin(G.t*2+i)*2,38,Math.sin(G.t*1.5+i)*.08);
+  G.objs.forEach(o=>drawE(o.e,o.x,o.y,o.e==="👢"?40:46,0,o.dir>0));
+  // boat, line, hook
+  const bx=p.x,by=wl-14,rodX=(p.state==="idle"||p.state==="move")?bx+20:p.hx;
+  drawE(save.sel.fishing,bx,by+Math.sin(G.t*2)*2,64);
+  ctx.strokeStyle="#5A3A1E";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(bx+6,by-14);ctx.lineTo(rodX,by-44);ctx.stroke();
+  const hookY=wl+p.hy;
+  ctx.strokeStyle="rgba(255,255,255,.9)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(rodX,by-44);ctx.lineTo(rodX,Math.max(by-20,hookY));ctx.stroke();
+  if(p.state==="down"||p.state==="up"){
+    ctx.strokeStyle="#C0C7D1";ctx.lineWidth=3;ctx.beginPath();ctx.arc(rodX-5,hookY,6,0,Math.PI);ctx.stroke();
+    if(p.c)drawE(p.c.e,rodX,hookY+18,46,Math.PI/2);
+  }
+};
+
 /* ---------- confetti ---------- */
 const cf=$("confetti"),cc=cf.getContext("2d");let bits=[],cfOn=false;
 function confetti(){
@@ -780,7 +1069,7 @@ updateBar();
 
 <script id="auto-update">
 (function(){
-  var V="20261022210946";
+  var V="20261022213338";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -791,7 +1080,7 @@ updateBar();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 22/10 às 21:09";
+  s.textContent="Atualizado em 22/10 às 21:33";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();
