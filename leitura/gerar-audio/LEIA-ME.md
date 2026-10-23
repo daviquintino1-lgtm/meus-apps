@@ -1,20 +1,23 @@
-# Como a voz da Miss Lua foi gerada
+# Como o áudio da Miss Lua é feito
 
-A voz é a **Chatterbox** (Resemble AI, licença MIT), clonada do timbre `ref_heart.wav` (a voz "Heart", escolhida pelo pai em 23/10/2026). O áudio fica todo dentro do app, sem internet.
+- **Frases e palavras:** voz Chatterbox (MIT) clonada do timbre `ref_heart.wav` ("Heart", escolhida pelo pai em 23/10/2026). Quando a Chatterbox pronuncia uma palavra solta errado, a palavra vem do Kokoro `af_heart` (mesmo timbre, pronúncia de dicionário).
+- **Sons das letras (`ph:`):** **gravações humanas reais**, recortadas exatamente como a pessoa fala, sem cortar o "uh" e sem esticar. A, b, c… vêm de um vídeo de alfabeto; ch, sh e th de um vídeo de digraphs. Só o "ing" é da Miss Lua. Ficam em `sons.npz`. **Nunca gere sons de letras por voz sintética**: soa como bateria e confunde a criança.
+- **No app:** a criança toca numa letra para ouvir o som dela. "Hear it" fala a palavra inteira. Não existe soletrar automático.
 
-- `sons_chatterbox.py` grava os **sons puros** das letras na mesma voz. Os sons que dá para segurar ("Mmmm", "Ssss", "Shhh") são falados inteiros pela voz e só ficam se a análise do áudio disser que são puros. Vogais, oclusivas e semivogais são recortadas de sílabas ("at", "pah", "wuh"). `sons_fix.py` refaz os que saíram fracos. O resultado aprovado fica em `sons.npz`.
-- `build_audio.py` grava as palavras, as frases da história e as falas da tutora, monta a palavra devagar (`ws:`) alongando a palavra normal com rubberband (mesmo tom de voz) e junta tudo em `audio.js`.
-- As falas geradas ficam em `cache/` (fora do git). Se a gravação parar no meio, é só rodar de novo que ela continua de onde parou.
-
-Para regerar (ex.: palavras novas da semana):
+## Passo a passo (palavras novas da semana)
 
 ```
-pip install --break-system-packages chatterbox-tts soundfile   # precisa de huggingface.co e *.hf.co liberados
 cd leitura/gerar-audio
-python3 build_audio.py          # ~30 s por fala num computador de 2 núcleos
+python3 build_audio.py          # grava só o que não está em cache/ (~30 s por fala)
+python3 conferir_palavras.py    # "ouve" cada palavra e corrige as erradas
+python3 limpar_palavras.py      # tira sons soltos antes/depois das palavras
+python3 build_audio.py          # monta audio.js de novo (agora tudo do cache)
 cp audio.js ../audio.js
-cd ../.. && python3 publicar.py
+python3 testes/teste_app.py <audio.js antigo>; python3 testes/teste_fluxo.py
+cd ../.. && TZ=America/New_York python3 publicar.py
 ```
 
-Só rode `sons_chatterbox.py` + `sons_fix.py` se quiser gravar os sons das letras de novo, porque eles mudam a cada gravação.
-`phon.py` é a versão antiga (Kokoro) dos sons e fica só como referência.
+- `cache/` guarda cada fala já gravada (chave = md5 do texto) e vai para o git, então só as palavras novas são gravadas. `cache/orig_*` é a gravação antes da limpeza.
+- `conferencia.json` e `limpeza.json` mostram o que o reconhecedor ouviu em cada palavra. Ele ouve "th" como "s" e erra vogais curtas, então isso não é defeito da gravação.
+- Requer `huggingface.co` e `*.hf.co` liberados (modelos Chatterbox, wav2vec2).
+- `phon.py`, `sons_chatterbox.py` e `sons_fix.py` são tentativas antigas de sons sintéticos e ficam só como histórico.
