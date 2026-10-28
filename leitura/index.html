@@ -219,7 +219,9 @@ details.parents li{margin-bottom:6px}
       </ul>
       <b>Ouça os sons (para conferir):</b>
       <div class="sndgrid" id="sndgrid"></div>
-      <p style="margin-top:14px"><button class="linkbtn" id="resetAll">↺ Recomeçar do zero</button></p>
+      <b>Problemas registrados (para mandar ao Claude se travar):</b>
+      <pre id="errLog" style="white-space:pre-wrap;font-size:.8rem;opacity:.75;margin:4px 0 0"></pre>
+      <p style="margin-top:14px"><button class="linkbtn" id="resetAll" style="touch-action:none;user-select:none;-webkit-user-select:none">↺ Recomeçar do zero</button></p>
     </details>
   </section>
 
@@ -358,7 +360,28 @@ const KEY="missLuaSave2";
 let save={stars:0,tickets:0,words:0,unlocked:1,done:[],stickers:[],best:{},plays:{},owned:{race:["🚗"],run:["🐇"],space:["🚀"],ocean:["🐠"],fishing:["🚣"]},sel:{race:"🚗",run:"🐇",space:"🚀",ocean:"🐠",fishing:"🚣"},seen:["race"],muted:false,flu:[]};
 try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s){save=Object.assign(save,s);}}catch(e){}
 save.owned.fishing=save.owned.fishing||["🚣"];save.sel.fishing=save.sel.fishing||"🚣";save.flu=save.flu||[];
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(save));}catch(e){}}
+/* Progress is kept twice (localStorage + IndexedDB) so a frozen app that gets force-closed, or a
+   browser that drops one store, does not wipe his games. The copy with more words read wins. */
+let wiping=false;
+const IDB={db:null,open(){return new Promise(r=>{try{const q=indexedDB.open("missLua",1);q.onupgradeneeded=()=>q.result.createObjectStore("s");q.onsuccess=()=>{this.db=q.result;r(this.db);};q.onerror=()=>r(null);}catch(e){r(null);}});},
+  async get(){const db=this.db||await this.open();if(!db)return null;return new Promise(r=>{try{const q=db.transaction("s").objectStore("s").get(KEY);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null);}catch(e){r(null);}});},
+  async put(v){const db=this.db||await this.open();if(!db)return;try{db.transaction("s","readwrite").objectStore("s").put(v,KEY);}catch(e){}},
+  async clear(){const db=this.db||await this.open();if(!db)return;try{db.transaction("s","readwrite").objectStore("s").delete(KEY);}catch(e){}}};
+function persist(){
+  if(wiping) return;
+  try{const old=JSON.parse(localStorage.getItem(KEY)||"null");if(old&&(old.words||0)>(save.words||0)){save=Object.assign(save,old);}}catch(e){}
+  save.t=Date.now(); const js=JSON.stringify(save);
+  try{localStorage.setItem(KEY,js);}catch(e){}
+  IDB.put(js);
+}
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist();}catch(e){}
+IDB.get().then(js=>{try{const s=js&&JSON.parse(js);
+  if(s&&(s.words||0)>(save.words||0)){save=Object.assign(save,s);try{localStorage.setItem(KEY,js);}catch(e){}if(typeof renderHome==="function"&&!$("home").hidden)renderHome();if(typeof updateBar==="function")updateBar();}
+  else if(!s&&save.words) IDB.put(JSON.stringify(save));}catch(e){}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)persist();});
+window.addEventListener("pagehide",()=>persist());
+/* small log of problems, shown in "Para os pais", so a freeze can be reported */
+function logErr(m){try{save.errs=(save.errs||[]).slice(-9).concat([new Date().toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" "+String(m).slice(0,120)]);persist();}catch(e){}}
 
 const $=id=>document.getElementById(id);
 const rand=(a,b)=>a+Math.random()*(b-a);
@@ -476,7 +499,8 @@ function listen(ms,onWords){
     try{voiceEl.pause();}catch(e){}
     const r=new SRec(); rec=r; r.lang="en-US"; r.interimResults=true; r.maxAlternatives=5; r.continuous=!!onWords;
     let texts=[],done=false; const seen=new Set();   /* keep every guess the iPad made while he talked */
-    const fin=err=>{if(done)return;done=true;try{r.stop();}catch(e){}if(rec===r)rec=null;res({error:err,texts});};
+    /* abort (not stop): on iPad a stopped recognizer can keep the mic busy and freeze the next try */
+    const fin=err=>{if(done)return;done=true;r.onresult=r.onerror=r.onend=null;try{r.abort();}catch(e){}if(rec===r)rec=null;res({error:err,texts});};
     r.onresult=e=>{
       for(let i=0;i<e.results.length;i++){const R=e.results[i];for(let j=0;j<R.length;j++)seen.add(R[j].transcript);}
       texts=[...seen];
@@ -554,7 +578,12 @@ $("wkStory").onclick=openStory;
 /* ---------- lesson (phonics + sight words) ---------- */
 let L=null;
 function levelData(i){return i===BASE?WEEK:LEVELS[i];}
-function startLevel(i){hush();L={kind:"phonics",lv:i,queue:shuffle(levelData(i).words),idx:0,since:0,busy:false,tries:0};show("lesson");round();}
+function startLevel(i){hush();
+  /* pick up where he stopped in this level instead of starting over */
+  const c=save.cur,words=levelData(i).words;
+  const resume=c&&c.lv===i&&c.idx>0&&c.idx<c.queue.length&&c.queue.length===words.length&&c.queue.every(q=>words.some(x=>x[0]===q[0]));
+  L={kind:"phonics",lv:i,queue:resume?c.queue:shuffle(words),idx:resume?c.idx:0,since:0,busy:false,tries:0};
+  save.cur={lv:i,queue:L.queue,idx:L.idx};persist();show("lesson");round();}
 function startSight(){hush();L={kind:"sight",lv:"sight",queue:shuffle(SIGHTW).slice(0,8).map(w=>[w,"👀"]),idx:0,since:0,busy:false,tries:0};show("lesson");round(true);}
 function bubble(t){$("say").textContent=t;}
 function wordData(w){return (window.PHON&&PHON[w])||{g:w.split(""),p:w.split("").map(c=>G2P[c])};}
@@ -675,13 +704,28 @@ $("micBtn").onclick=async()=>{
 $("hearWord").onclick=()=>{hush();play("w:"+sayWordNow);};
 $("saidIt").onclick=()=>finishWord(0);
 $("parentOk").onclick=()=>finishWord(1);
-/* parents: wipe all progress on this device (two taps, so it is never by accident) */
-$("resetAll").onclick=()=>{const b=$("resetAll");
-  if(!b.dataset.armed){b.dataset.armed="1";b.textContent="Toque de novo para apagar estrelas, jogos e progresso";setTimeout(()=>{delete b.dataset.armed;b.textContent="↺ Recomeçar do zero";},5000);return;}
-  try{localStorage.removeItem(KEY);}catch(e){} location.reload();};
+/* parents: wipe all progress on this device. Press and HOLD 3 seconds, so a child tapping around never does it. */
+(()=>{const b=$("resetAll");let t=null;const label="↺ Recomeçar do zero (segure 3 segundos)";b.textContent=label;
+  const cancel=()=>{if(t){clearTimeout(t);t=null;b.textContent=label;}};
+  b.addEventListener("pointerdown",e=>{e.preventDefault();b.textContent="Segure… apagando em 3 s";
+    t=setTimeout(async()=>{t=null;wiping=true;try{localStorage.removeItem(KEY);}catch(e){}await IDB.clear();location.reload();},3000);});
+  ["pointerup","pointerleave","pointercancel"].forEach(ev=>b.addEventListener(ev,cancel));
+  b.addEventListener("click",e=>e.preventDefault());})();
+/* never stay frozen: log the error, release the mic and the "busy" lock so taps work again */
+function unstick(why){try{if(rec){try{rec.abort();}catch(e){}rec=null;}}catch(e){}
+  try{$("micBtn").classList.remove("listening");}catch(e){} if(L) L.busy=false; logErr("destravou: "+why);}
+window.addEventListener("error",e=>unstick((e.message||"erro")+(e.lineno?" linha "+e.lineno:"")));
+window.addEventListener("unhandledrejection",e=>unstick("promise: "+((e.reason&&e.reason.message)||e.reason||"")));
+let busySince=0,micSince=0;
+setInterval(()=>{const now=Date.now(),overlayOpen=!!document.querySelector(".overlay:not([hidden])");
+  if(L&&L.busy&&!overlayOpen){busySince=busySince||now;if(now-busySince>12000){busySince=0;unstick("tela parada");}}else busySince=0;
+  if($("micBtn").classList.contains("listening")||rec){micSince=micSince||now;if(now-micSince>20000){micSince=0;unstick("microfone parado");}}else micSince=0;},2000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&rec){unstick("voltou ao app com microfone aberto");}});
+document.querySelector("details.parents").addEventListener("toggle",()=>{const l=$("errLog");if(l)l.textContent=(save.errs&&save.errs.length)?save.errs.join("\n"):"Nenhum problema registrado.";});
 function finishWord(micBonus){
   hush(); $("sayItOv").hidden=true; confetti();
   const gain=(L.firstTry?2:1)+micBonus; save.words++; L.idx++; L.since++;
+  if(save.cur&&save.cur.lv===L.lv) save.cur.idx=L.idx;
   addStars(gain);
   let ticket=false; if(L.since>=3){L.since=0;save.tickets++;ticket=true;setTimeout(()=>{floater("+1 🎟️",$("ticketPill"));bump("ticketPill");},300);}
   persist(); updateBar();
@@ -690,6 +734,7 @@ function finishWord(micBonus){
   round();
 }
 function levelDone(){
+  save.cur=null;
   const i=L.lv; let sticker="🌟";
   if(typeof i==="number"){
     if(!save.done.includes(i)) save.done.push(i);
@@ -1108,7 +1153,7 @@ updateBar();
 
 <script id="auto-update">
 (function(){
-  var V="20261023195106";
+  var V="20261027200759";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -1119,7 +1164,7 @@ updateBar();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 23/10 às 19:51";
+  s.textContent="Atualizado em 27/10 às 20:07";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();
