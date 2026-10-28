@@ -87,6 +87,7 @@ details.parents li{margin-bottom:6px}
 .tile{min-width:66px;height:96px;padding:0 10px 14px;background:var(--card);border-radius:20px;font-family:var(--read);font-weight:700;font-size:3.3rem;line-height:1;display:grid;place-items:center;box-shadow:0 6px 0 #9DB4D6;position:relative;transition:transform .15s,background .15s}
 .tile::after{content:"";position:absolute;bottom:12px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--berry);opacity:.55}
 .tile.multi::after{width:36px;margin-left:-18px;border-radius:6px;height:7px}
+.tile.silent{color:#9AA8C2}.tile.silent::after{opacity:.2}
 .tile.lit{background:var(--sun);transform:translateY(-8px) scale(1.05)}
 .tools{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .tool{background:var(--berry);color:#fff;border-radius:16px;padding:10px 16px;font-family:var(--display);font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 0 #4B36B8}
@@ -192,12 +193,12 @@ details.parents li{margin-bottom:6px}
       <div class="bubble">Hi! I'm <b>Miss Lua</b>. Let's read words, win stars and play games!<small>Leia palavras, ganhe estrelas e bilhetes de jogo.</small></div>
     </div>
     <div class="week">
-      <span class="eyebrow">This week at school · Oct 19–23</span>
+      <span class="eyebrow">This week at school · Oct 26–30</span>
       <h2>SH · TH · -ING</h2>
       <div class="weekbtns">
         <button class="weekbtn" id="wkPhonics"><span class="e">🔤</span>Sound it out<small>ship · fishing</small></button>
         <button class="weekbtn" id="wkSight"><span class="e">👀</span>Know by heart<small>all · goes · her</small></button>
-        <button class="weekbtn" id="wkStory"><span class="e">🎣</span>Story<small>“Fishing”</small></button>
+        <button class="weekbtn" id="wkStory"><span class="e">🎂</span>Story<small>“Cake Shop”</small></button>
       </div>
     </div>
     <div class="bigrow">
@@ -210,9 +211,9 @@ details.parents li{margin-bottom:6px}
     <details class="parents">
       <summary>Para os pais</summary>
       <ul>
-        <li><b>Esta semana:</b> fônica de SH, TH e -ING, palavras de memória (all, goes, her, make, too) e o texto de fluência “Fishing”, igual à folha da escola.</li>
+        <li><b>Esta semana (26–30/out):</b> “a” longo com o “e” mágico (cake, name, bake…). Palavras de memória da Unidade 2, incluindo as novas (four, five, part, ride, your), as skill words (came, same, make, take, bake) e o texto de fluência “Cake Shop”, igual à folha da escola. O “e” mágico aparece mais claro na palavra; tocando nele, a Miss Lua explica.</li>
         <li><b>Microfone:</b> depois de acertar, ele fala a palavra e a Miss Lua confere. No texto, ela ouve a frase e marca de verde o que entendeu. Ela confere a palavra, não dá nota de pronúncia som por som. Funciona no Safari; na primeira vez o iPad pede permissão para o microfone.</li>
-        <li><b>Checagem de fluência:</b> no texto, toque em “Fluency check”. Ele lê, você marca as palavras erradas e o app calcula palavras corretas por minuto (a meta do 1º bimestre é 23) e guarda o histórico.</li>
+        <li><b>Checagem de fluência:</b> no texto, toque em “Fluency check”. Ele lê, você marca as palavras erradas e o app calcula palavras corretas por minuto (a meta do 2º bimestre é 35) e guarda o histórico.</li>
         <li><b>Método:</b> fônica sintética. A criança toca em cada letra para ouvir o som dela (gravado por uma pessoa de verdade), junta os sons e escolhe a figura. “Hear it” fala a palavra inteira.</li>
         <li><b>Recompensas:</b> 1 estrela por palavra (+1 se acertar de primeira, +1 se falar certo no microfone). A cada 3 palavras, 1 bilhete de jogo. Jogos novos destravam conforme o total de palavras lidas.</li>
         <li>10 a 15 minutos por dia é o ideal. O progresso fica salvo neste aparelho.</li>
@@ -243,14 +244,14 @@ details.parents li{margin-bottom:6px}
   <section class="screen" id="story" hidden>
     <div class="tutor-row">
       <div class="tutor" data-tutor></div>
-      <div class="bubble" id="storySay">Let's read “Fishing”!<small>Toque numa palavra para ouvir.</small></div>
+      <div class="bubble" id="storySay">Let's read “Cake Shop”!<small>Toque numa palavra para ouvir.</small></div>
     </div>
     <div class="tools">
       <button class="tool" id="stListen">🔊 Listen</button>
       <button class="tool warm" id="stRead">🎤 Read to Miss Lua</button>
       <button class="tool alt" id="stFlu">⏱ Fluency check</button>
     </div>
-    <div class="storybox"><h2>Fishing 🎣</h2><div id="storyText"></div></div>
+    <div class="storybox"><h2>Cake Shop 🎂</h2><div id="storyText"></div></div>
     <div class="flu" id="fluPanel" hidden>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <span class="clock" id="fluClock">0:00</span>
@@ -333,10 +334,10 @@ const LEVELS=[
  {name:"Blends",ex:"stop · crab · frog",sticker:"🌈",words:[["stop","🛑"],["crab","🦀"],["drum","🥁"],["flag","🚩"],["sled","🛷"],["frog","🐸"],["tent","⛺"],["gift","🎁"]]}
 ];
 const BASE=LEVELS.length;
-const WEEK={name:"This week: SH · TH · -ING",sticker:"🎣",words:[["ship","🚢"],["shop","🏪"],["trash","🗑️"],["fish","🐟"],["bath","🛁"],["fishing","🎣"],["splash","💦"],["wishing","🌠"],["rushing","🏃"]]};
-const SIGHTW=["all","goes","her","make","too","she","the","this","then","says","thin","with"];
-const STORY=["Beth is fishing with Seth.","She is wishing for a big fish.","The fish is thrashing and splashing!","Seth is rushing to help.","Beth sees the fish and grins.","“This is the best thing!” she says.","Then the fish slips!","Splash! Back in it goes!"];
-const HOMO={too:["to","two"],to:["too","two"],beth:["bess","bath","beth's"],seth:["set","seth's","sat"],grins:["grin","greens"],says:["said","sez"],thrashing:["trashing","crashing"],her:["hur"],goes:["go's","gos"],all:["awe"],thin:["think"],with:["width"],the:["a","duh"],then:["than"],fishing:["fission"],splash:["splashed"],ship:["shipped"],shop:["shopped"]};
+const WEEK={name:"This week: Long A (a_e)",sticker:"🎂",words:[["cake","🎂"],["bake","🧑‍🍳"],["name","📛"],["snake","🐍"],["grape","🍇"],["plane","✈️"],["game","🎮"],["wave","🌊"],["skate","⛸️"]]};
+const SIGHTW=["all","goes","her","make","too","she","the","this","then","says","four","five","part","ride","your","came","same","take","name","bake"];
+const STORY=["Kate can bake.","She bakes a cake at her shop.","She gets a cake pan.","She can make a pink cake.","Kate likes to bake at her cake shop!","It is fun for her!","Sam and Jake come.","They can take a bite.","The cake is a big hit!"];
+const HOMO={four:["for","4","fore"],five:["5"],your:["you're","yore"],bite:["byte"],kate:["cate","kate's","k8"],jake:["jake's"],sam:["psalm","sam's"],too:["to","two"],to:["too","two"],beth:["bess","bath","beth's"],seth:["set","seth's","sat"],grins:["grin","greens"],says:["said","sez"],thrashing:["trashing","crashing"],her:["hur"],goes:["go's","gos"],all:["awe"],thin:["think"],with:["width"],the:["a","duh"],then:["than"],fishing:["fission"],splash:["splashed"],ship:["shipped"],shop:["shopped"]};
 const GAMES=[
  {id:"race",name:"Turbo Race",pic:"🏎️",need:0,bg:"linear-gradient(135deg,#FF8A3D,#FF4F5E)",hint:"Tap ⬅️ left or right ➡️"},
  {id:"run",name:"Jungle Run",pic:"🐇",need:6,bg:"linear-gradient(135deg,#43C66B,#1F9D78)",hint:"Tap to jump! Tap twice = big jump"},
@@ -353,8 +354,8 @@ const SHOP={
  fishing:{label:"Boats",items:[["🚣",0],["🛶",8],["⛵",14],["🚤",20],["🛥️",28]]}
 };
 const PRAISE=["p1","p2","p3","p4","p5","p6"];
-const KEYWORD={a:"cat",e:"bed",i:"pig",o:"dog",u:"bug",b:"bat",c:"cat",d:"dog",f:"fish",g:"gift",h:"hat",k:"kid",l:"lip",m:"map",n:"pan",p:"pig",r:"rat",s:"sun",t:"ten",v:"van",w:"web",z:"zoo",sh:"ship",ch:"chick",th:"bath",ck:"duck",x:"fox",ing:"fishing"};
-const G2P={a:"æ",e:"ɛ",i:"ɪ",o:"ɑ",u:"ʌ",b:"b",c:"k",d:"d",f:"f",g:"ɡ",h:"h",k:"k",l:"l",m:"m",n:"n",p:"p",r:"ɹ",s:"s",t:"t",v:"v",w:"w",z:"z",sh:"ʃ",ch:"ʧ",th:"θ",ck:"k",x:"ks",ing:"ɪŋ"};
+const KEYWORD={"a_e":"cake",a:"cat",e:"bed",i:"pig",o:"dog",u:"bug",b:"bat",c:"cat",d:"dog",f:"fish",g:"gift",h:"hat",k:"kid",l:"lip",m:"map",n:"pan",p:"pig",r:"rat",s:"sun",t:"ten",v:"van",w:"web",z:"zoo",sh:"ship",ch:"chick",th:"bath",ck:"duck",x:"fox",ing:"fishing"};
+const G2P={"a_e":"eɪ",a:"æ",e:"ɛ",i:"ɪ",o:"ɑ",u:"ʌ",b:"b",c:"k",d:"d",f:"f",g:"ɡ",h:"h",k:"k",l:"l",m:"m",n:"n",p:"p",r:"ɹ",s:"s",t:"t",v:"v",w:"w",z:"z",sh:"ʃ",ch:"ʧ",th:"θ",ck:"k",x:"ks",ing:"ɪŋ"};
 
 const KEY="missLuaSave2";
 let save={stars:0,tickets:0,words:0,unlocked:1,done:[],stickers:[],best:{},plays:{},owned:{race:["🚗"],run:["🐇"],space:["🚀"],ocean:["🐠"],fishing:["🚣"]},sel:{race:"🚗",run:"🐇",space:"🚀",ocean:"🐠",fishing:"🚣"},seen:["race"],muted:false,flu:[]};
@@ -564,7 +565,7 @@ function renderHome(){
   updateBar();show("home");
 }
 function buildSoundGrid(){
-  const keys=["a","e","i","o","u","b","c","d","f","g","h","k","l","m","n","p","r","s","t","v","w","z","sh","ch","th","ck","x","ing"];
+  const keys=["a","e","i","o","u","b","c","d","f","g","h","k","l","m","n","p","r","s","t","v","w","z","sh","ch","th","ck","x","ing","a_e"];
   $("sndgrid").innerHTML=keys.map(k=>`<button data-k="${k}">${k}<small>${KEYWORD[k]}</small></button>`).join("");
   $("sndgrid").querySelectorAll("button").forEach(b=>b.onclick=()=>{hush();play("ph:"+G2P[b.dataset.k],false);});
 }
@@ -631,8 +632,8 @@ async function round(intro){
   }
   const d=wordData(w);
   $("replay").textContent="🔊 Hear it"; $("pickHint").textContent="Which picture is it?";
-  $("word").innerHTML=d.g.map((g,k)=>`<button class="tile${g.length>1?" multi":""}" data-k="${k}" aria-label="sound ${g}">${g}</button>`).join("");
-  document.querySelectorAll("#word .tile").forEach(t=>t.onclick=async()=>{hush();t.classList.add("lit");await play("ph:"+d.p[+t.dataset.k]);t.classList.remove("lit");if(d.g[+t.dataset.k]==="ing")play("t:ing");});
+  $("word").innerHTML=d.g.map((g,k)=>{const lab=g.replace(/_/g,"");return `<button class="tile${lab.length>1?" multi":""}${d.p[k]==="∅"?" silent":""}" data-k="${k}" aria-label="sound ${lab}">${lab}</button>`;}).join("");
+  document.querySelectorAll("#word .tile").forEach(t=>t.onclick=async()=>{hush();t.classList.add("lit");const ph=d.p[+t.dataset.k];await play(ph==="∅"?"t:magice":"ph:"+ph);t.classList.remove("lit");if(d.g[+t.dataset.k]==="ing")play("t:ing");});
   const others=shuffle(levelData(L.lv).words.filter(x=>x[0]!==w)).slice(0,2);
   $("choices").innerHTML=shuffle([L.queue[L.idx],...others]).map(o=>`<button class="choice" data-w="${o[0]}" aria-label="picture choice">${o[1]}</button>`).join("");
   document.querySelectorAll(".choice").forEach(c=>c.onclick=()=>pick(c,w));
@@ -759,7 +760,7 @@ function renderStory(){
 }
 function openStory(){
   hush(); renderStory(); stopFlu(); $("fluPanel").hidden=true; renderFluHist();
-  $("storySay").innerHTML="Let's read “Fishing”!<small>Toque numa palavra para ouvir.</small>";
+  $("storySay").innerHTML="Let's read “Cake Shop”!<small>Toque numa palavra para ouvir.</small>";
   show("story"); play("t:story");
 }
 function curSent(i){$("storyText").querySelectorAll(".sent").forEach(p=>p.classList.toggle("cur",+p.dataset.i===i));}
@@ -805,7 +806,7 @@ $("stRead").onclick=async()=>{
   if(sid!==sess) return;
   save.words+=good; addStars(good+2); save.tickets++; persist(); updateBar(); confetti(); SFX.fanfare();
   await play("t:storydone");
-  message("🎣","You read the story!",`${good} de ${STORY.length} frases bem lidas. +1 bilhete 🎟️`,"🎮 Play a game",()=>openArcade(true),"🔁 Read again",()=>$("stRead").click());
+  message("🎂","You read the story!",`${good} de ${STORY.length} frases bem lidas. +1 bilhete 🎟️`,"🎮 Play a game",()=>openArcade(true),"🔁 Read again",()=>$("stRead").click());
 };
 
 /* fluency check for parents */
@@ -823,8 +824,8 @@ $("fluDone").onclick=()=>{
   const wcpm=Math.round(correct/(secs/60));
   stopFlu();
   const d=new Date(); save.flu.push({d:d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}),c:correct,e:errs,s:Math.round(secs),w:wcpm}); persist();
-  $("fluResult").innerHTML=`<b>${correct} palavras certas, ${errs} erros, ${Math.floor(secs/60)}:${String(Math.round(secs)%60).padStart(2,"0")}.</b><br>${wcpm} palavras certas por minuto ${wcpm>=23?"✅ meta alcançada!":"(meta: 23)"}`;
-  renderFluHist(); if(wcpm>=23){confetti();SFX.fanfare();}
+  $("fluResult").innerHTML=`<b>${correct} palavras certas, ${errs} erros, ${Math.floor(secs/60)}:${String(Math.round(secs)%60).padStart(2,"0")}.</b><br>${wcpm} palavras certas por minuto ${wcpm>=35?"✅ meta alcançada!":"(meta: 35)"}`;
+  renderFluHist(); if(wcpm>=35){confetti();SFX.fanfare();}
 };
 function stopFlu(){flu.on=false;clearInterval(flu.timer);$("fluStart").hidden=false;$("fluDone").hidden=true;$("fluClock").textContent="0:00";}
 function renderFluHist(){
@@ -1153,7 +1154,7 @@ updateBar();
 
 <script id="auto-update">
 (function(){
-  var V="20261027200759";
+  var V="20261027223552";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -1164,7 +1165,7 @@ updateBar();
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 27/10 às 20:07";
+  s.textContent="Atualizado em 27/10 às 22:35";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();

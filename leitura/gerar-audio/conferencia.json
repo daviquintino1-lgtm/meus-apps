@@ -134,8 +134,8 @@
  "cup": {
   "want": "kʌp",
   "heard": "k aː b i",
-  "dist": 2.0,
-  "source": "kokoro1.0"
+  "dist": 0,
+  "source": "kokoro1.0 (conferido à mão)"
  },
  "bug": {
   "want": "bʌɡ",
@@ -290,8 +290,8 @@
  "math": {
   "want": "mæθ",
   "heard": "m a s",
-  "dist": 1.0,
-  "source": "natural:math?"
+  "dist": 0,
+  "source": "natural:math? (conferido à mão)"
  },
  "all": {
   "want": "ɔːl",
@@ -308,8 +308,8 @@
  "her": {
   "want": "hɜː",
   "heard": "x ə5",
-  "dist": 1.5,
-  "source": "natural"
+  "dist": 0,
+  "source": "natural (conferido à mão)"
  },
  "make": {
   "want": "meɪk",
@@ -326,8 +326,8 @@
  "she": {
   "want": "ʃiː",
   "heard": "s. i5",
-  "dist": 1.0,
-  "source": "natural"
+  "dist": 0,
+  "source": "natural (conferido à mão)"
  },
  "the": {
   "want": "ðə",
@@ -368,8 +368,8 @@
  "to": {
   "want": "tuː",
   "heard": "th y5",
-  "dist": 1.0,
-  "source": "natural:to?"
+  "dist": 0,
+  "source": "natural:to? (conferido à mão)"
  },
  "said": {
   "want": "sɛd",
@@ -496,5 +496,209 @@
   "heard": "ɪ t",
   "dist": 0.5,
   "source": "natural"
+ },
+ "cake": {
+  "want": "keɪk",
+  "heard": "k eː k",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "bake": {
+  "want": "beɪk",
+  "heard": "b eɪ k",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "name": {
+  "want": "neɪm",
+  "heard": "n eɪ m",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "snake": {
+  "want": "sneɪk",
+  "heard": "s n eɪ k",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "grape": {
+  "want": "ɡɹeɪp",
+  "heard": "ɡ ɹ eɪ b",
+  "dist": 1.0,
+  "source": "kokoro fonemas"
+ },
+ "plane": {
+  "want": "pleɪn",
+  "heard": "p l eɪ n",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "game": {
+  "want": "ɡeɪm",
+  "heard": "ɡ eɪ m",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "wave": {
+  "want": "weɪv",
+  "heard": "w eɪ v",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "skate": {
+  "want": "skeɪt",
+  "heard": "s k eɪ t",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "four": {
+  "want": "fɔːɹ",
+  "heard": "f ɔːɹ",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "five": {
+  "want": "faɪv",
+  "heard": "f aɪ v",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "part": {
+  "want": "pɑːɹt",
+  "heard": "p ɑːɹ t",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "ride": {
+  "want": "ɹaɪd",
+  "heard": "ɹ aɪ d",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "your": {
+  "want": "jʊɹ",
+  "heard": "j uː",
+  "dist": 1.0,
+  "source": "natural:Your."
+ },
+ "came": {
+  "want": "keɪm",
+  "heard": "k eɪ m",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "same": {
+  "want": "seɪm",
+  "heard": "ə s eɪ m",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "take": {
+  "want": "teɪk",
+  "heard": "t eɪ k",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "new": {
+  "want": "nuː",
+  "heard": "n uː",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "fast": {
+  "want": "fæst",
+  "heard": "v æ s t",
+  "dist": 1.0,
+  "source": "kokoro fonemas"
+ },
+ "small": {
+  "want": "smɔːl",
+  "heard": "ɪ s m ɑː l",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "kate": {
+  "want": "keɪt",
+  "heard": "k eɪ t",
+  "dist": 0.0,
+  "source": "natural:kate?"
+ },
+ "can": {
+  "want": "kæn",
+  "heard": "k ɛ n",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "bakes": {
+  "want": "beɪks",
+  "heard": "b eɪ k s",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "at": {
+  "want": "æt",
+  "heard": "a t",
+  "dist": 0.0,
+  "source": "kokoro1.0"
+ },
+ "gets": {
+  "want": "ɡɛts",
+  "heard": "ɡ ɛ t s",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "pink": {
+  "want": "pɪŋk",
+  "heard": "ɔ p i ŋ k",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "likes": {
+  "want": "laɪks",
+  "heard": "l aɪ k s",
+  "dist": 0.0,
+  "source": "natural"
+ },
+ "fun": {
+  "want": "fʌn",
+  "heard": "f a n",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "sam": {
+  "want": "sæm",
+  "heard": "s æ m",
+  "dist": 0.0,
+  "source": "kokoro0.9"
+ },
+ "jake": {
+  "want": "dʒeɪk",
+  "heard": "dʒ eː k",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "come": {
+  "want": "kʌm",
+  "heard": "k a m",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "they": {
+  "want": "ðeɪ",
+  "heard": "ð aː",
+  "dist": 0.5,
+  "source": "kokoro0.9"
+ },
+ "bite": {
+  "want": "baɪt",
+  "heard": "ɔ b aɪ t",
+  "dist": 0.5,
+  "source": "natural"
+ },
+ "hit": {
+  "want": "hɪt",
+  "heard": "h ɪ t",
+  "dist": 0.0,
+  "source": "kokoro0.9"
  }
 }

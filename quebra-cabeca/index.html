@@ -230,7 +230,7 @@ setPic(startPic);
 </script>
 <script id="auto-update">
 (function(){
-  var V="20261027200759";
+  var V="20261027223552";
   function check(){
     fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){
       t=(t||"").trim();
@@ -241,7 +241,7 @@ setPic(startPic);
   window.addEventListener("pageshow",check);
   check();
   var s=document.createElement("p");
-  s.textContent="Atualizado em 27/10 às 20:07";
+  s.textContent="Atualizado em 27/10 às 22:35";
   s.style.cssText="text-align:center;font-size:12px;opacity:.55;margin:24px 0 8px;font-family:system-ui,sans-serif";
   document.body.appendChild(s);
 })();

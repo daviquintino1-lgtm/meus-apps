@@ -150,10 +150,10 @@
   "cut_after_ms": 7
  },
  "ship": {
-  "heard": "ɑː ʃ ɪ p",
-  "kept": "ʃ ɪ p",
-  "cut_before_ms": 440,
-  "cut_after_ms": 0
+  "heard": "ə ʃ ɛ b a",
+  "kept": "ʃ ɛ b",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
  },
  "shell": {
   "heard": "ʃ ɛ l",
@@ -497,6 +497,210 @@
   "cut_before_ms": 0,
   "cut_after_ms": 30
  },
+ "cake": {
+  "heard": "k eː k",
+  "kept": "k eː k",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "bake": {
+  "heard": "b eɪ k",
+  "kept": "b eɪ k",
+  "cut_before_ms": 10,
+  "cut_after_ms": 20
+ },
+ "name": {
+  "heard": "n eɪ m",
+  "kept": "n eɪ m",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "snake": {
+  "heard": "s n eɪ k",
+  "kept": "s n eɪ k",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "grape": {
+  "heard": "ɡ ɹ eɪ b",
+  "kept": "ɡ ɹ eɪ b",
+  "cut_before_ms": 10,
+  "cut_after_ms": 6
+ },
+ "plane": {
+  "heard": "p l eɪ n",
+  "kept": "p l eɪ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "game": {
+  "heard": "ɡ eɪ m",
+  "kept": "ɡ eɪ m",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "wave": {
+  "heard": "w eɪ v",
+  "kept": "w eɪ v",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "skate": {
+  "heard": "s k eɪ t",
+  "kept": "s k eɪ t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 10
+ },
+ "four": {
+  "heard": "f ɔːɹ",
+  "kept": "f ɔːɹ",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
+ "five": {
+  "heard": "f aɪ v",
+  "kept": "f aɪ v",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "part": {
+  "heard": "p ɑːɹ t",
+  "kept": "p ɑːɹ t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 3
+ },
+ "ride": {
+  "heard": "ɹ aɪ d",
+  "kept": "ɹ aɪ d",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "your": {
+  "heard": "j uː",
+  "kept": "j uː",
+  "cut_before_ms": 0,
+  "cut_after_ms": 10
+ },
+ "came": {
+  "heard": "k eɪ m",
+  "kept": "k eɪ m",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "same": {
+  "heard": "ə s eɪ m",
+  "kept": "s eɪ m",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "take": {
+  "heard": "t eɪ k",
+  "kept": "t eɪ k",
+  "cut_before_ms": 0,
+  "cut_after_ms": 27
+ },
+ "new": {
+  "heard": "n uː",
+  "kept": "n uː",
+  "cut_before_ms": 0,
+  "cut_after_ms": 220
+ },
+ "fast": {
+  "heard": "v æ s t",
+  "kept": "v æ s t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "small": {
+  "heard": "ɪ s m ɑː l",
+  "kept": "s m ɑː l",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "kate": {
+  "heard": "k eɪ t",
+  "kept": "k eɪ t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 10
+ },
+ "can": {
+  "heard": "k ɛ n",
+  "kept": "k ɛ n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "bakes": {
+  "heard": "b eɪ k s",
+  "kept": "b eɪ k s",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "at": {
+  "heard": "a t",
+  "kept": "a t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "gets": {
+  "heard": "ɡ ɛ t s",
+  "kept": "ɡ ɛ t s",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "pink": {
+  "heard": "ɔ p i ŋ k",
+  "kept": "p i ŋ k",
+  "cut_before_ms": 330,
+  "cut_after_ms": 0
+ },
+ "likes": {
+  "heard": "l aɪ k s",
+  "kept": "l aɪ k s",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "fun": {
+  "heard": "f a n",
+  "kept": "f a n",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "sam": {
+  "heard": "s æ m",
+  "kept": "s æ m",
+  "cut_before_ms": 10,
+  "cut_after_ms": 0
+ },
+ "jake": {
+  "heard": "dʒ eː k",
+  "kept": "dʒ eː k",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "come": {
+  "heard": "k a m",
+  "kept": "k a m",
+  "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "they": {
+  "heard": "ð aː",
+  "kept": "ð aː",
+  "cut_before_ms": 0,
+  "cut_after_ms": 30
+ },
+ "bite": {
+  "heard": "ɔ b aɪ t",
+  "kept": "b aɪ t",
+  "cut_before_ms": 505,
+  "cut_after_ms": 20
+ },
+ "hit": {
+  "heard": "h ɪ t",
+  "kept": "h ɪ t",
+  "cut_before_ms": 0,
+  "cut_after_ms": 20
+ },
  "t:hello": {
   "heard": "h aɪ aɪ m m ɪ s l uː ə l ɛ t s ɹ iː d s ʌ m w ɜː d z w ɪ n s t ɑːɹ z æ n d p l eɪ ɡ eɪ m z",
   "kept": "h aɪ aɪ m m ɪ s l uː ə l ɛ t s ɹ iː d s ʌ m w ɜː d z w ɪ n s t ɑːɹ z æ n d p l eɪ ɡ eɪ m z",
@@ -642,9 +846,15 @@
   "cut_after_ms": 0
  },
  "t:story": {
-  "heard": "l ɛ t s ɹ iː d ð ə s t oːɹ ɹ i f ɪ ʃ ɪ ŋ l ɪ s ə n t ə m iː f ɜː s t",
-  "kept": "l ɛ t s ɹ iː d ð ə s t oːɹ ɹ i f ɪ ʃ ɪ ŋ l ɪ s ə n t ə m iː f ɜː s t",
+  "heard": "l ɛ t s ɹ iː d ð ə s t oːɹ ɹ i k eɪ k ʃ ɑː p l ɪ s ə n t ə m i f ɜː s t",
+  "kept": "l ɛ t s ɹ iː d ð ə s t oːɹ ɹ i k eɪ k ʃ ɑː p l ɪ s ə n t ə m i f ɜː s t",
   "cut_before_ms": 0,
+  "cut_after_ms": 0
+ },
+ "t:magice": {
+  "heard": "m æ dʒ ɪ k iː ɪ z k w aɪ ə t ɪ t m eɪ k s ð ɪ eɪ s eɪ ɪ t s n eɪ m",
+  "kept": "m æ dʒ ɪ k iː ɪ z k w aɪ ə t ɪ t m eɪ k s ð ɪ eɪ s eɪ ɪ t s n eɪ m",
+  "cut_before_ms": 1,
   "cut_after_ms": 0
  },
  "t:storyturn": {
@@ -708,50 +918,56 @@
   "cut_after_ms": 0
  },
  "s:0": {
-  "heard": "b ɛ θ ɪ z f ɪ ʃ ɪ ŋ w ɪ ð s ɛ θ",
-  "kept": "b ɛ θ ɪ z f ɪ ʃ ɪ ŋ w ɪ ð s ɛ θ",
+  "heard": "f eɪ t k æ n b eɪ k",
+  "kept": "f eɪ t k æ n b eɪ k",
   "cut_before_ms": 0,
   "cut_after_ms": 0
  },
  "s:1": {
-  "heard": "ʃ iː ɪ z w ɪ ʃ ɪ ŋ f ɔːɹ ɹ ɐ b ɪ ɡ f ɪ ʃ",
-  "kept": "ʃ iː ɪ z w ɪ ʃ ɪ ŋ f ɔːɹ ɹ ɐ b ɪ ɡ f ɪ ʃ",
+  "heard": "ʃ iː b eɪ k s ɐ k eɪ k æ t h ɜː ʃ ɑː p",
+  "kept": "ʃ iː b eɪ k s ɐ k eɪ k æ t h ɜː ʃ ɑː p",
   "cut_before_ms": 0,
   "cut_after_ms": 0
  },
  "s:2": {
-  "heard": "ð ə f ɪ ʃ ɪ z θ ɹ æ ʃ ɪ ŋ æ n d s p l æ ʃ ɪ ŋ",
-  "kept": "ð ə f ɪ ʃ ɪ z θ ɹ æ ʃ ɪ ŋ æ n d s p l æ ʃ ɪ ŋ",
+  "heard": "ʃ iː ɡ ɛ t s ɐ k eɪ k p æ n",
+  "kept": "ʃ iː ɡ ɛ t s ɐ k eɪ k p æ n",
   "cut_before_ms": 0,
   "cut_after_ms": 0
  },
  "s:3": {
-  "heard": "s ɛ t ɪ z ɹ ʌ ʃ ɪ ŋ t ə h ɛ l p",
-  "kept": "s ɛ t ɪ z ɹ ʌ ʃ ɪ ŋ t ə h ɛ l p",
-  "cut_before_ms": 0,
+  "heard": "ʃ iː k æ n m eɪ k ɐ p ɪ ŋ k eɪ k",
+  "kept": "ʃ iː k æ n m eɪ k ɐ p ɪ ŋ k eɪ k",
+  "cut_before_ms": 10,
   "cut_after_ms": 0
  },
  "s:4": {
-  "heard": "b ɛ θ s iː z ð ə f ɪ ʃ æ n d ɡ ɹ ɪ n z",
-  "kept": "b ɛ θ s iː z ð ə f ɪ ʃ æ n d ɡ ɹ ɪ n z",
+  "heard": "k eɪ t l aɪ k s t ə b eɪ k æ ɾ h ɚ k eɪ k ʃ ɑː p",
+  "kept": "k eɪ t l aɪ k s t ə b eɪ k æ ɾ h ɚ k eɪ k ʃ ɑː p",
   "cut_before_ms": 0,
   "cut_after_ms": 0
  },
  "s:5": {
-  "heard": "ð ɪ s ɪ z ð ə b ɛ s t θ ɪ ŋ ʃ iː s ɛ z",
-  "kept": "ð ɪ s ɪ z ð ə b ɛ s t θ ɪ ŋ ʃ iː s ɛ z",
+  "heard": "ɪ ɾ ɪ z s p ʌ n f ɜː h ɜː",
+  "kept": "ɪ ɾ ɪ z s p ʌ n f ɜː h ɜː",
   "cut_before_ms": 0,
-  "cut_after_ms": 0
+  "cut_after_ms": 20
  },
  "s:6": {
-  "heard": "ð ɛ n ð ə f ɪ ʃ s l ɪ p s",
-  "kept": "ð ɛ n ð ə f ɪ ʃ s l ɪ p s",
+  "heard": "s æ m æ n d dʒ eɪ k k ʌ m",
+  "kept": "s æ m æ n d dʒ eɪ k k ʌ m",
   "cut_before_ms": 0,
   "cut_after_ms": 0
  },
  "s:7": {
-  "heard": "s p l æ ʃ b æ k ɪ n ɪ t ɡ oʊ z",
-  "kept": "s p l æ ʃ b æ k ɪ n ɪ t ɡ oʊ z",
+  "heard": "ð eɪ k ə n t eɪ k ɐ b aɪ t",
+  "kept": "ð eɪ k ə n t eɪ k ɐ b aɪ t",
+  "cut_before_ms": 10,
+  "cut_after_ms": 2
+ },
+ "s:8": {
+  "heard": "ð ə k eɪ k ɪ z ɐ b ɪ ɡ h ɪ t",
+  "kept": "ð ə k eɪ k ɪ z ɐ b ɪ ɡ h ɪ t",
   "cut_before_ms": 0,
   "cut_after_ms": 0
  }

@@ -17,7 +17,7 @@ LEAD = 0.14   # seconds of silence before every clip
 TAIL = 0.08
 GAP = 0.4     # pause between sounds, same as in the teacher's video
 
-G2P = {"a":"æ","e":"ɛ","i":"ɪ","o":"ɑ","u":"ʌ","b":"b","c":"k","d":"d","f":"f","g":"ɡ","h":"h","j":"ʤ","k":"k",
+G2P = {"a_":"eɪ","_e":"∅","a":"æ","e":"ɛ","i":"ɪ","o":"ɑ","u":"ʌ","b":"b","c":"k","d":"d","f":"f","g":"ɡ","h":"h","j":"ʤ","k":"k",
        "l":"l","m":"m","n":"n","p":"p","r":"ɹ","s":"s","t":"t","v":"v","w":"w","y":"j","z":"z",
        "sh":"ʃ","ch":"ʧ","th":"θ","ck":"k","ll":"l","x":"ks","ing":"ɪŋ"}
 
@@ -27,27 +27,28 @@ LEVELS = [
  ["bed","hen","web","ten","bus","sun","cup","bug"],
  ["fish","ship","shell","chick","duck","sock","bath","lock"],
  ["stop","crab","drum","flag","sled","frog","tent","gift"],
- # school week Oct 19-23: sh, th, -ing
- ["ship","shop","trash","fish","bath","fishing","splash","wishing","rushing","thin","with","math"],
+ # school week Oct 26-30: long a with magic e (a_e)
+ ["cake","bake","name","snake","grape","plane","game","wave","skate"],
 ]
-SPLIT = {"fish":["f","i","sh"],"ship":["sh","i","p"],"shell":["sh","e","ll"],"chick":["ch","i","ck"],
+SPLIT = {"cake":["c", "a_", "k", "_e"],"bake":["b", "a_", "k", "_e"],"name":["n", "a_", "m", "_e"],"snake":["s", "n", "a_", "k", "_e"],"grape":["g", "r", "a_", "p", "_e"],"plane":["p", "l", "a_", "n", "_e"],"game":["g", "a_", "m", "_e"],"wave":["w", "a_", "v", "_e"],"skate":["s", "k", "a_", "t", "_e"],"fish":["f","i","sh"],"ship":["sh","i","p"],"shell":["sh","e","ll"],"chick":["ch","i","ck"],
          "duck":["d","u","ck"],"sock":["s","o","ck"],"bath":["b","a","th"],"lock":["l","o","ck"],
          "shop":["sh","o","p"],"trash":["t","r","a","sh"],"fishing":["f","i","sh","ing"],
          "splash":["s","p","l","a","sh"],"wishing":["w","i","sh","ing"],"rushing":["r","u","sh","ing"],
          "thin":["th","i","n"],"with":["w","i","th"],"math":["m","a","th"]}
 
-SIGHT = ["all","goes","her","make","too","she","the","this","then","says","is","for","to","said"]
-VOCAB = ["eat","dig","sleep","burrow"]
+SIGHT = ["all","goes","her","make","too","she","the","this","then","says","is","for","to","said","four","five","part","ride","your","came","same","take","name","bake"]
+VOCAB = ["big","new","fast","small"]
 
 STORY = [
- "Beth is fishing with Seth.",
- "She is wishing for a big fish.",
- "The fish is thrashing and splashing!",
- "Seth is rushing to help.",
- "Beth sees the fish and grins.",
- "\"This is the best thing!\" she says.",
- "Then the fish slips!",
- "Splash! Back in it goes!",
+ "Kate can bake.",
+ "She bakes a cake at her shop.",
+ "She gets a cake pan.",
+ "She can make a pink cake.",
+ "Kate likes to bake at her cake shop!",
+ "It is fun for her!",
+ "Sam and Jake come.",
+ "They can take a bite.",
+ "The cake is a big hit!",
 ]
 
 PHRASES = {
@@ -70,7 +71,8 @@ PHRASES = {
  "find": "Find the word:",
  "findintro": "These are words we know by heart. Listen, and find the word!",
  "ing": "I N G says ing, like in fishing.",
- "story": "Let's read the story Fishing! Listen to me first.",
+ "story": "Let's read the story Cake Shop! Listen to me first.",
+ "magice": "Magic e is quiet. It makes the a say its name!",
  "storyturn": "Now it's your turn. Read it out loud! Tap any word if you need help.",
  "storydone": "You read the whole story! I'm so proud of you!",
  "week": "These are the words from your school this week!",
@@ -144,6 +146,8 @@ def main():
         word = norm(tts(w), 0.8)
         parts, times, t = [], [], LEAD
         for i, ph in enumerate(p):
+            if ph == "∅":                      # magic e: a tile with no sound of its own
+                times.append(round(t, 3)); continue
             seg = P[ph]
             times.append(round(t, 3)); parts.append(seg); t += len(seg)/SR
             if i < len(p)-1:
